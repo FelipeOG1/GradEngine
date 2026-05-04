@@ -22,6 +22,22 @@ Tensor Tensor::rand(size_t r, size_t c) {
     return result;
 }
 
+Tensor Tensor::randint(size_t r, size_t c, int low, int high) {
+    Tensor result(r, c);
+    static std::mt19937 rng(
+        std::random_device{}()
+    );
+
+    std::uniform_int_distribution<int>
+        dist(low, high - 1);
+    
+    for (size_t i = 0; i < result.size(); i++) {
+        result._data[i] = static_cast<float>(dist(rng));    
+    }
+
+    return result;
+}
+
 Tensor Tensor::dot(const Tensor& a, const Tensor& b) {
        
 }

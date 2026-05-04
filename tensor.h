@@ -28,6 +28,7 @@ private:
 public:
     Tensor(size_t r, size_t c);
     static Tensor rand(size_t r, size_t c);
+    static Tensor randint(size_t r, size_t c, int low, int high);
     static Tensor dot(const Tensor& a, const Tensor& b);
     
 

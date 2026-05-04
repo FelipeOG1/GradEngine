@@ -134,7 +134,19 @@ void test_tensor_division() {
 void test_dot() {
     Tensor a = Tensor::rand(3, 3);
     Tensor b = Tensor::rand(3, 3);
+    
     a.show();      
+}
+
+void test_randint() {
+    Tensor r = Tensor::randint(3, 3, 0, 10);
+    
+    for (size_t i = 0; i < r.rows(); i++) {
+        for (size_t j = 0; j < r.cols(); j++) {
+            int val = static_cast<int>(r(i, j));
+            assert(val >= 0 && val < 10);
+        }
+    }
 }
 
 int main() {
@@ -146,6 +158,7 @@ int main() {
     test_scalar_division();
     test_tensor_division();
     test_dot();
+    test_randint();
     
     std::cout << "All tests passed.\n";
 
