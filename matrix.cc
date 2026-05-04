@@ -19,7 +19,7 @@ const float& Matrix::operator()(size_t r, size_t c) const {
 Matrix Matrix::operator+(float scalar) const {
     Matrix result(*this);
 
-    for (size_t i = 0; i < _size; i++) {
+    for (size_t i = 0; i < result.size(); i++) {
         result._data[i] += scalar;
     }
 
@@ -31,7 +31,7 @@ Matrix Matrix::operator+(const Matrix& other) const {
 
     Matrix result(*this);
 
-    for (size_t i = 0; i < _size; i++) {
+    for (size_t i = 0; i < result.size(); i++) {
         result._data[i] += other._data[i];
     }
 
@@ -41,7 +41,7 @@ Matrix Matrix::operator+(const Matrix& other) const {
 Matrix Matrix::operator-(float scalar) const {
     Matrix result(*this);
 
-    for (size_t i = 0; i < _size; i++) {
+    for (size_t i = 0; i < result.size(); i++) {
         result._data[i] -= scalar;
     }
 
@@ -53,7 +53,7 @@ Matrix Matrix::operator-(const Matrix& other) const {
 
     Matrix result(*this);
 
-    for (size_t i = 0; i < _size; i++) {
+    for (size_t i = 0; i < result.size(); i++) {
         result._data[i] -= other._data[i];
     }
 
@@ -65,7 +65,7 @@ Matrix Matrix::operator*(const Matrix& other) const {
 
     Matrix result(*this);
 
-    for (size_t i = 0; i < _size; i++) {
+    for (size_t i = 0; i < result.size(); i++) {
         result._data[i] *= other._data[i];
     }
 
@@ -76,7 +76,7 @@ Matrix Matrix::operator*(float scalar) const {
 
     Matrix result(*this);
 
-    for (size_t i = 0; i < _size; i++) {
+    for (size_t i = 0; i < result.size(); i++) {
         result._data[i] *= scalar;
     }
 
@@ -89,7 +89,7 @@ Matrix Matrix::operator/(const Matrix& other) const {
 
     Matrix result(*this);
 
-    for (size_t i = 0; i < _size; i++) {
+    for (size_t i = 0; i < result.size(); i++) {
         result._data[i] /= other._data[i];
     }
 
@@ -101,7 +101,7 @@ Matrix Matrix::operator/(float scalar) const {
 
     Matrix result(*this);
 
-    for (size_t i = 0; i < _size; i++) {
+    for (size_t i = 0; i < result.size(); i++) {
         result._data[i] /= scalar;
     }
 
