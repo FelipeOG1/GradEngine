@@ -4,7 +4,7 @@
 #include <cstddef>
 #include <vector>
 
-class Matrix {
+class Tensor {
 private:
     size_t _rows;
     size_t _cols;
@@ -16,34 +16,34 @@ private:
         assert(c < _cols);
     }
 
-    inline void check_dims(const Matrix& other) const {
+    inline void check_dims(const Tensor& other) const {
         assert(_rows == other._rows);
         assert(_cols == other._cols);
     }
-    inline void check_dot_dims(const Matrix& other) const {
+    inline void check_dot_dims(const Tensor& other) const {
         assert(_cols == other._rows);
     }
 
 public:
-    Matrix(size_t r, size_t c);
+    Tensor(size_t r, size_t c);
 
     float& operator()(size_t r, size_t c);
     const float& operator()(size_t r, size_t c) const;
 
-    Matrix operator+(float scalar) const;
-    Matrix operator+(const Matrix& other) const;
+    Tensor operator+(float scalar) const;
+    Tensor operator+(const Tensor& other) const;
 
-    Matrix operator-(float scalar) const;
-    Matrix operator-(const Matrix& other) const;
+    Tensor operator-(float scalar) const;
+    Tensor operator-(const Tensor& other) const;
     
-    Matrix operator*(float scalar) const;
-    Matrix operator*(const Matrix& other) const;
+    Tensor operator*(float scalar) const;
+    Tensor operator*(const Tensor& other) const;
     
-    Matrix operator/(float scalar) const;
-    Matrix operator/(const Matrix& other) const;
+    Tensor operator/(float scalar) const;
+    Tensor operator/(const Tensor& other) const;
     
 
-    Matrix dot(const Matrix& other) const;
+    Tensor dot(const Tensor& other) const;
     
     size_t rows() const;
     size_t cols() const;

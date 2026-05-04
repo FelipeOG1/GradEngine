@@ -1,23 +1,23 @@
-#include "matrix.h"
-
-Matrix::Matrix(size_t r, size_t c)
+#include "tensor.h"
+#include <iostream>
+Tensor::Tensor(size_t r, size_t c)
     : _rows(r),
       _cols(c),
       _data(r * c),
       _size(r * c) {}
 
-float& Matrix::operator()(size_t r, size_t c) {
+float& Tensor::operator()(size_t r, size_t c) {
     check_bounds(r, c);
     return _data[r * _cols + c];
 }
 
-const float& Matrix::operator()(size_t r, size_t c) const {
+const float& Tensor::operator()(size_t r, size_t c) const {
     check_bounds(r, c);
     return _data[r * _cols + c];
 }
 
-Matrix Matrix::operator+(float scalar) const {
-    Matrix result(*this);
+Tensor Tensor::operator+(float scalar) const {
+    Tensor result(*this);
 
     for (size_t i = 0; i < result.size(); i++) {
         result._data[i] += scalar;
@@ -26,10 +26,10 @@ Matrix Matrix::operator+(float scalar) const {
     return result;
 }
 
-Matrix Matrix::operator+(const Matrix& other) const {
+Tensor Tensor::operator+(const Tensor& other) const {
     check_dims(other);
 
-    Matrix result(*this);
+    Tensor result(*this);
 
     for (size_t i = 0; i < result.size(); i++) {
         result._data[i] += other._data[i];
@@ -38,8 +38,8 @@ Matrix Matrix::operator+(const Matrix& other) const {
     return result;
 }
 
-Matrix Matrix::operator-(float scalar) const {
-    Matrix result(*this);
+Tensor Tensor::operator-(float scalar) const {
+    Tensor result(*this);
 
     for (size_t i = 0; i < result.size(); i++) {
         result._data[i] -= scalar;
@@ -48,10 +48,10 @@ Matrix Matrix::operator-(float scalar) const {
     return result;
 }
 
-Matrix Matrix::operator-(const Matrix& other) const {
+Tensor Tensor::operator-(const Tensor& other) const {
     check_dims(other);
 
-    Matrix result(*this);
+    Tensor result(*this);
 
     for (size_t i = 0; i < result.size(); i++) {
         result._data[i] -= other._data[i];
@@ -60,10 +60,10 @@ Matrix Matrix::operator-(const Matrix& other) const {
     return result;
 }
 
-Matrix Matrix::operator*(const Matrix& other) const {
+Tensor Tensor::operator*(const Tensor& other) const {
      check_dims(other);
 
-    Matrix result(*this);
+    Tensor result(*this);
 
     for (size_t i = 0; i < result.size(); i++) {
         result._data[i] *= other._data[i];
@@ -72,9 +72,9 @@ Matrix Matrix::operator*(const Matrix& other) const {
     return result;
  
 }
-Matrix Matrix::operator*(float scalar) const {
+Tensor Tensor::operator*(float scalar) const {
 
-    Matrix result(*this);
+    Tensor result(*this);
 
     for (size_t i = 0; i < result.size(); i++) {
         result._data[i] *= scalar;
@@ -84,10 +84,10 @@ Matrix Matrix::operator*(float scalar) const {
 }
 
 
-Matrix Matrix::operator/(const Matrix& other) const {
+Tensor Tensor::operator/(const Tensor& other) const {
     check_dims(other);
 
-    Matrix result(*this);
+    Tensor result(*this);
 
     for (size_t i = 0; i < result.size(); i++) {
         result._data[i] /= other._data[i];
@@ -97,9 +97,9 @@ Matrix Matrix::operator/(const Matrix& other) const {
  
 }
 
-Matrix Matrix::operator/(float scalar) const {
+Tensor Tensor::operator/(float scalar) const {
 
-    Matrix result(*this);
+    Tensor result(*this);
 
     for (size_t i = 0; i < result.size(); i++) {
         result._data[i] /= scalar;
@@ -108,20 +108,26 @@ Matrix Matrix::operator/(float scalar) const {
     return result;
 }
 
-Matrix Matrix::dot(const Matrix& other) const {
+Tensor Tensor::dot(const Tensor& other) const {
     check_dot_dims(other);
-    Matrix result(*this);
+    Tensor result(*this);
+    for (int i=0; i < result.rows(); i++) {
+        for (int j=0; j < result.cols(); j++) {
+            std::cout << result(i, j) << std::endl;
+        }
+    } 
     
+    return result;
 }
 
-size_t Matrix::rows() const {
+size_t Tensor::rows() const {
     return _rows;
 }
 
-size_t Matrix::cols() const {
+size_t Tensor::cols() const {
     return _cols;
 }
 
-size_t Matrix::size() const {
+size_t Tensor::size() const {
     return _size;
 }

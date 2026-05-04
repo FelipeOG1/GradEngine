@@ -8,14 +8,14 @@ BUILD_DIR = build
 BIN_DIR = bin
 
 # Source files
-SRCS = $(SRC_DIR)/matrix.cc
+SRCS = $(SRC_DIR)/tensor.cc
 MAIN_SRC = $(SRC_DIR)/main.cc
-TEST_SRC = $(TEST_DIR)/test_matrix.cpp
+TEST_SRC = $(TEST_DIR)/test_tensor.cpp
 
 # Object files
-OBJS = $(BUILD_DIR)/matrix.o
+OBJS = $(BUILD_DIR)/tensor.o
 MAIN_OBJ = $(BUILD_DIR)/main.o
-TEST_OBJ = $(BUILD_DIR)/test_matrix.o
+TEST_OBJ = $(BUILD_DIR)/test_tensor.o
 
 # Targets
 MAIN_TARGET = $(BIN_DIR)/main
@@ -41,13 +41,13 @@ $(BIN_DIR):
 	@mkdir -p $(BIN_DIR)
 
 # Object files
-$(BUILD_DIR)/matrix.o: $(SRC_DIR)/matrix.cc $(SRC_DIR)/matrix.h | $(BUILD_DIR)
+$(BUILD_DIR)/tensor.o: $(SRC_DIR)/tensor.cc $(SRC_DIR)/tensor.h | $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(BUILD_DIR)/main.o: $(SRC_DIR)/main.cc $(SRC_DIR)/matrix.h | $(BUILD_DIR)
+$(BUILD_DIR)/main.o: $(SRC_DIR)/main.cc $(SRC_DIR)/tensor.h | $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(BUILD_DIR)/test_matrix.o: $(TEST_DIR)/test_matrix.cpp $(SRC_DIR)/matrix.h | $(BUILD_DIR)
+$(BUILD_DIR)/test_tensor.o: $(TEST_DIR)/test_tensor.cpp $(SRC_DIR)/tensor.h | $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Targets
