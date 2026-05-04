@@ -85,7 +85,7 @@ Matrix Matrix::operator*(float scalar) const {
 
 
 Matrix Matrix::operator/(const Matrix& other) const {
-     check_dims(other);
+    check_dims(other);
 
     Matrix result(*this);
 
@@ -106,6 +106,12 @@ Matrix Matrix::operator/(float scalar) const {
     }
 
     return result;
+}
+
+Matrix Matrix::dot(const Matrix& other) const {
+    check_dot_dims(other);
+    Matrix result(*this);
+    
 }
 
 size_t Matrix::rows() const {

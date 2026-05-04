@@ -20,6 +20,9 @@ private:
         assert(_rows == other._rows);
         assert(_cols == other._cols);
     }
+    inline void check_dot_dims(const Matrix& other) const {
+        assert(_cols == other._rows);
+    }
 
 public:
     Matrix(size_t r, size_t c);
