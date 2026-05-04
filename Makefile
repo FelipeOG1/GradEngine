@@ -1,0 +1,65 @@
+CXX = g++
+CXXFLAGS = -std=c++11 -Wall -Wextra -I.
+
+# Directories
+SRC_DIR = .
+TEST_DIR = tests
+BUILD_DIR = build
+BIN_DIR = bin
+
+# Source files
+SRCS = $(SRC_DIR)/matrix.cc
+MAIN_SRC = $(SRC_DIR)/main.cc
+TEST_SRC = $(TEST_DIR)/test_matrix.cpp
+
+# Object files
+OBJS = $(BUILD_DIR)/matrix.o
+MAIN_OBJ = $(BUILD_DIR)/main.o
+TEST_OBJ = $(BUILD_DIR)/test_matrix.o
+
+# Targets
+MAIN_TARGET = $(BIN_DIR)/main
+TEST_TARGET = $(BIN_DIR)/test
+
+.PHONY: all main test clean
+
+all: main test
+
+main: $(MAIN_TARGET)
+	@echo "Running main..."
+	@$(MAIN_TARGET)
+
+test: $(TEST_TARGET)
+	@echo "Running tests..."
+	@$(TEST_TARGET)
+
+# Build directories
+$(BUILD_DIR):
+	@mkdir -p $(BUILD_DIR)
+
+$(BIN_DIR):
+	@mkdir -p $(BIN_DIR)
+
+# Object files
+$(BUILD_DIR)/matrix.o: $(SRC_DIR)/matrix.cc $(SRC_DIR)/matrix.h | $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/main.o: $(SRC_DIR)/main.cc $(SRC_DIR)/matrix.h | $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/test_matrix.o: $(TEST_DIR)/test_matrix.cpp $(SRC_DIR)/matrix.h | $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Targets
+$(MAIN_TARGET): $(OBJS) $(MAIN_OBJ) | $(BIN_DIR)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+$(TEST_TARGET): $(OBJS) $(TEST_OBJ) | $(BIN_DIR)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+clean:
+	@rm -rf $(BUILD_DIR) $(BIN_DIR)
+
+# Directories as order-only prerequisites
+$(BUILD_DIR):
+$(BIN_DIR):
