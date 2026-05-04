@@ -134,7 +134,7 @@ void test_tensor_division() {
 void test_dot() {
     Tensor a = Tensor::rand(3, 3);
     Tensor b = Tensor::rand(3, 3);
-    a.dot(b);
+    a.show();      
 }
 
 int main() {

@@ -32,10 +32,7 @@ public:
     
 
 
-    
-
-
-
+    void show() { for (auto& value : _data) {std::cout<< value << std::endl;} };
 
 
     float& operator()(size_t r, size_t c);
