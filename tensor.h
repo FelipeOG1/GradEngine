@@ -30,6 +30,14 @@ public:
     static Tensor rand(size_t r, size_t c);
     static Tensor dot(const Tensor& a, const Tensor& b);
     
+
+
+    
+
+
+
+
+
     float& operator()(size_t r, size_t c);
     const float& operator()(size_t r, size_t c) const;
 

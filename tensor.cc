@@ -22,6 +22,10 @@ Tensor Tensor::rand(size_t r, size_t c) {
     return result;
 }
 
+Tensor Tensor::dot(const Tensor& a, const Tensor& b) {
+       
+}
+
 float& Tensor::operator()(size_t r, size_t c) {
     check_bounds(r, c);
     return _data[r * _cols + c];
@@ -124,17 +128,6 @@ Tensor Tensor::operator/(float scalar) const {
     return result;
 }
 
-Tensor Tensor::dot(const Tensor& other) const {
-    check_dot_dims(other);
-    Tensor result(*this);
-    for (int i=0; i < result.rows(); i++) {
-        for (int j=0; j < result.cols(); j++) {
-            std::cout << result(i, j) << std::endl;
-        }
-    } 
-    
-    return result;
-}
 
 size_t Tensor::rows() const {
     return _rows;
