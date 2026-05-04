@@ -10,9 +10,13 @@ private:
     size_t _rows;
     size_t _cols;
     std::vector<float>_data;
-    inline void check_bounds(size_t r, size_t c) { 
+    inline void check_bounds(size_t r, size_t c) const { 
         assert(r <= _rows);
         assert(c <= _cols);
+    }
+    inline void check_dims(const Matrix& other) const {
+        assert(_rows == other._rows);
+        assert(_cols == other._cols);
     }
     
 public:
@@ -30,6 +34,11 @@ public:
         return *(this);
     }
     
+    Matrix operator+(const Matrix& other) {
+        check_dims(other);
+           
+    }
+    
     size_t rows() const { return _rows; }
     size_t cols() const { return _cols; }
     
@@ -37,7 +46,8 @@ public:
 };
 
 int main() {
-    Matrix m(3, 3);
+    Matrix m(30, 3);
+    std::cout << m.rows();
     return 0;
 
 }
