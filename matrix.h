@@ -32,7 +32,16 @@ public:
 
     Matrix operator-(float scalar) const;
     Matrix operator-(const Matrix& other) const;
+    
+    Matrix operator*(float scalar) const;
+    Matrix operator*(const Matrix& other) const;
+    
+    Matrix operator/(float scalar) const;
+    Matrix operator/(const Matrix& other) const;
+    
 
+    Matrix dot(const Matrix& other) const;
+    
     size_t rows() const;
     size_t cols() const;
     size_t size() const;
