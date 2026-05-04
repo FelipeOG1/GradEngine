@@ -3,7 +3,8 @@
 #include <cassert>
 #include <cstddef>
 #include <vector>
-
+#include <random>
+#include <iostream>
 class Tensor {
 private:
     size_t _rows;
@@ -26,7 +27,9 @@ private:
 
 public:
     Tensor(size_t r, size_t c);
-
+    static Tensor rand(size_t r, size_t c);
+    static Tensor dot(const Tensor& a, const Tensor& b);
+    
     float& operator()(size_t r, size_t c);
     const float& operator()(size_t r, size_t c) const;
 
@@ -42,7 +45,7 @@ public:
     Tensor operator/(float scalar) const;
     Tensor operator/(const Tensor& other) const;
     
-
+    
     Tensor dot(const Tensor& other) const;
     
     size_t rows() const;

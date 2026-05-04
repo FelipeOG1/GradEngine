@@ -1,10 +1,26 @@
 #include "tensor.h"
-#include <iostream>
 Tensor::Tensor(size_t r, size_t c)
     : _rows(r),
       _cols(c),
       _data(r * c),
       _size(r * c) {}
+
+
+Tensor Tensor::rand(size_t r, size_t c) {
+    Tensor result(r, c);
+    static std::mt19937 rng(
+        std::random_device{}()
+    );
+
+    std::uniform_real_distribution<float>
+        dist(0.0f, 1.0f);
+    
+    for (int i=0; i < result.size(); i++) {
+        result._data[i] = dist(rng);    
+    }
+
+    return result;
+}
 
 float& Tensor::operator()(size_t r, size_t c) {
     check_bounds(r, c);
