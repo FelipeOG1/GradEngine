@@ -36,7 +36,9 @@ Tensor Tensor::randint(size_t r, size_t c, int low, int high) {
 
     return result;
 }
+
 Tensor Tensor::matmul(const Tensor &a, const Tensor &b) {
+    matmul_dims(a, b);
     Tensor out(a.rows(), b.cols());
     return out;
 }

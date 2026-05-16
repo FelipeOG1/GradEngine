@@ -22,7 +22,7 @@ private:
         assert(_cols == other._cols);
     }
     
-    inline void matmul_dims(const Tensor& a, const Tensor& b) const {
+    static inline void matmul_dims(const Tensor& a, const Tensor& b) {
         assert(a.cols() == b.rows());
     }
     
