@@ -9,8 +9,9 @@ class Tensor {
 private:
     size_t _rows;
     size_t _cols;
-    std::vector<float> _data;
     size_t _size;
+    std::vector<float> _data;
+    std::vector<float> _grad;
 
     inline void check_bounds(size_t r, size_t c) const {
         assert(r < _rows);
@@ -26,8 +27,6 @@ private:
         assert(a.cols() == b.rows());
     }
     
-    
-
 public:
     Tensor(size_t r, size_t c);
     static Tensor rand(size_t r, size_t c);
