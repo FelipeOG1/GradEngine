@@ -21,15 +21,17 @@ private:
         assert(_rows == other._rows);
         assert(_cols == other._cols);
     }
-    inline void check_dot_dims(const Tensor& other) const {
-        assert(_cols == other._rows);
+    inline void matmul_dims(const Tensor& a, const Tensor& b) const {
+        assert(a.cols() == b.rows());
     }
+    
+    
 
 public:
     Tensor(size_t r, size_t c);
     static Tensor rand(size_t r, size_t c);
     static Tensor randint(size_t r, size_t c, int low, int high);
-    static Tensor dot(const Tensor& a, const Tensor& b);
+    static Tensor matmul(const Tensor& a, const Tensor& b);
     
     void show();
     
@@ -48,7 +50,6 @@ public:
     Tensor operator/(float scalar) const;
     Tensor operator/(const Tensor& other) const;
 
-    Tensor matmul(const Tensor& a, const Tensor& b) const;
     
     size_t rows() const;
     size_t cols() const;
