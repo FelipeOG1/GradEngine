@@ -14,7 +14,7 @@ Tensor Tensor::rand(size_t r, size_t c) {
     std::uniform_real_distribution<float>
         dist(0.0f, 1.0f);
     
-    for (int i=0; i < result.size(); i++) {
+    for (size_t i=0; i < result.size(); i++) {
         result._data[i] = dist(rng);    
     }
 
@@ -36,7 +36,10 @@ Tensor Tensor::randint(size_t r, size_t c, int low, int high) {
 
     return result;
 }
-
+Tensor Tensor::matmul(const Tensor &a, const Tensor &b) {
+    Tensor out(a.rows(), b.cols());
+    return out;
+}
        
 
 float& Tensor::operator()(size_t r, size_t c) {

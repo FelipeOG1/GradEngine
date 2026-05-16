@@ -1,8 +1,9 @@
 #include <iostream>
 #include "tensor.h"
 int main() {
-    Tensor a = Tensor::rand(3, 3); 
-    std::cout << a(0, 0);
+    Tensor a(2, 3);
+    Tensor b(3, 10);
+    Tensor out = Tensor::matmul(a, b);
     return 0;
 
 }

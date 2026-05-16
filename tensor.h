@@ -21,6 +21,7 @@ private:
         assert(_rows == other._rows);
         assert(_cols == other._cols);
     }
+    
     inline void matmul_dims(const Tensor& a, const Tensor& b) const {
         assert(a.cols() == b.rows());
     }
