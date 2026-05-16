@@ -5,7 +5,6 @@ Tensor::Tensor(size_t r, size_t c)
       _data(r * c),
       _size(r * c) {}
 
-
 Tensor Tensor::rand(size_t r, size_t c) {
     Tensor result(r, c);
     static std::mt19937 rng(
@@ -38,9 +37,7 @@ Tensor Tensor::randint(size_t r, size_t c, int low, int high) {
     return result;
 }
 
-Tensor Tensor::dot(const Tensor& a, const Tensor& b) {
        
-}
 
 float& Tensor::operator()(size_t r, size_t c) {
     check_bounds(r, c);
@@ -143,7 +140,6 @@ Tensor Tensor::operator/(float scalar) const {
 
     return result;
 }
-
 
 size_t Tensor::rows() const {
     return _rows;

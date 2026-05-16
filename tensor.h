@@ -31,11 +31,8 @@ public:
     static Tensor randint(size_t r, size_t c, int low, int high);
     static Tensor dot(const Tensor& a, const Tensor& b);
     
-
-
-    void show() { for (auto& value : _data) {std::cout<< value << std::endl;} };
-
-
+    void show();
+    
     float& operator()(size_t r, size_t c);
     const float& operator()(size_t r, size_t c) const;
 
@@ -50,9 +47,8 @@ public:
     
     Tensor operator/(float scalar) const;
     Tensor operator/(const Tensor& other) const;
-    
-    
-    Tensor dot(const Tensor& other) const;
+
+    Tensor matmul(const Tensor& a, const Tensor& b) const;
     
     size_t rows() const;
     size_t cols() const;

@@ -132,10 +132,11 @@ void test_tensor_division() {
 }
 
 void test_dot() {
-    Tensor a = Tensor::rand(3, 3);
-    Tensor b = Tensor::rand(3, 3);
+    Tensor a = Tensor::randint(2, 2, 1, 5);
+    Tensor b = Tensor::randint(3, 3, 1, 5);
     
-    a.show();      
+    a.show(); 
+    b.show();
 }
 
 void test_randint() {
