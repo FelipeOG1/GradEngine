@@ -4,7 +4,7 @@ Tensor::Tensor(size_t r, size_t c)
       _cols(c),
       _data(r * c),
       _grad(r * c),
-      _size(r * c) {}
+      _size(r * c)  {}
 
 Tensor Tensor::rand(size_t r, size_t c) {
     Tensor result(r, c);
@@ -41,6 +41,8 @@ Tensor Tensor::randint(size_t r, size_t c, int low, int high) {
 Tensor Tensor::matmul(const Tensor &a, const Tensor &b) {
     matmul_dims(a, b);
     Tensor out(a.rows(), b.cols());
+    size_t width = a.cols();
+    
     
     return out;
 }
