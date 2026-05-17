@@ -12,7 +12,7 @@ private:
     size_t _size;
     std::vector<float> _data;
     std::vector<float> _grad;
-
+    
     inline void check_bounds(size_t r, size_t c) const {
         assert(r < _rows);
         assert(c < _cols);
@@ -26,6 +26,11 @@ private:
     static inline void matmul_dims(const Tensor& a, const Tensor& b) {
         assert(a.cols() == b.rows());
     }
+    static inline void matmul_square_dims(const Tensor& a, const Tensor& b) {
+        assert (a.rows() == a.cols());
+        assert (b.rows() == b.cols());
+    }
+   
     
 public:
     Tensor(size_t r, size_t c);

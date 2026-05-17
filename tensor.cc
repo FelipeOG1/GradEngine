@@ -38,15 +38,10 @@ Tensor Tensor::randint(size_t r, size_t c, int low, int high) {
     return result;
 }
 
-Tensor Tensor::matmul(const Tensor &a, const Tensor &b) {
-    matmul_dims(a, b);
-    Tensor out(a.rows(), b.cols());
-    size_t width = a.cols();
-    
-    
-    return out;
+Tensor Tensor::matmul(const Tensor& M, const Tensor& N) {
+    matmul_square_dims(M, N);
 }
-       
+      
 
 float& Tensor::operator()(size_t r, size_t c) {
     check_bounds(r, c);
