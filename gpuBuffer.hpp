@@ -23,7 +23,7 @@ public:
     }
 
     
-    ~GpuBuffer() { if (_f_ptr)  hipFree(_f_ptr); }
+   ~GpuBuffer() { if (_f_ptr)  hipFree(_f_ptr); }
 };
 
 
