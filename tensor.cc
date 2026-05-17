@@ -179,3 +179,6 @@ size_t Tensor::cols() const {
 size_t Tensor::size() const {
     return _size;
 }
+const float* Tensor::data() const {
+    return _data.data();
+}

@@ -59,4 +59,5 @@ public:
     size_t rows() const;
     size_t cols() const;
     size_t size() const;
+    const float* data() const;
 };

@@ -7,11 +7,10 @@ class GpuBuffer {
 private:
     float* _f_ptr;
     size_t _n;
-
 public:
     GpuBuffer(size_t n) : _n(n) {
         if(hipMalloc(&_f_ptr, n * sizeof(float)) != hipSuccess) {
-            throw std::runtime_error("Probel alocating memory on gpu");
+            throw std::runtime_error("Proble alocating memory on gpu");
         }
     }
 
