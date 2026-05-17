@@ -1,5 +1,12 @@
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra -I.
+
+# ROCm / HIP includes for LSP (nvim/clangd) and compilation
+ROCM_PATH ?= /opt/rocm
+ROCM_FLAGS = -I$(ROCM_PATH)/include \
+             -D__HIP_PLATFORM_AMD__= \
+             -D__HIP_PLATFORM_HCC__=
+
+CXXFLAGS = -std=c++11 -Wall -Wextra -I. $(ROCM_FLAGS)
 
 # Directories
 SRC_DIR = .

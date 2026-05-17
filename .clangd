@@ -1,0 +1,8 @@
+CompileFlags:
+  Add:
+    - -std=c++11
+    - -I.
+    - -I/opt/rocm/include
+    - -D__HIP_PLATFORM_AMD__=
+    - -D__HIP_PLATFORM_HCC__=
+  Remove: []
