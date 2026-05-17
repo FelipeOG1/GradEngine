@@ -7,6 +7,7 @@ ROCM_FLAGS = -I$(ROCM_PATH)/include \
              -D__HIP_PLATFORM_HCC__=
 
 CXXFLAGS = -std=c++11 -Wall -Wextra -I. $(ROCM_FLAGS)
+LDFLAGS  = -L$(ROCM_PATH)/lib -lamdhip64
 
 # Directories
 SRC_DIR = .
@@ -59,14 +60,10 @@ $(BUILD_DIR)/test_tensor.o: $(TEST_DIR)/test_tensor.cpp $(SRC_DIR)/tensor.h | $(
 
 # Targets
 $(MAIN_TARGET): $(OBJS) $(MAIN_OBJ) | $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
 
 $(TEST_TARGET): $(OBJS) $(TEST_OBJ) | $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
 
 clean:
 	@rm -rf $(BUILD_DIR) $(BIN_DIR)
-
-# Directories as order-only prerequisites
-$(BUILD_DIR):
-$(BIN_DIR):
