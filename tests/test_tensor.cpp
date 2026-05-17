@@ -131,6 +131,67 @@ void test_tensor_division() {
     assert(result(1,1) == 5);
 }
 
+void test_matmul_square_2x2() {
+    Tensor a(2, 2);
+    Tensor b(2, 2);
+
+    a(0,0) = 1; a(0,1) = 2;
+    a(1,0) = 3; a(1,1) = 4;
+
+    b(0,0) = 5; b(0,1) = 6;
+    b(1,0) = 7; b(1,1) = 8;
+
+    Tensor result = Tensor::matmul_square(a, b);
+
+    assert(result(0,0) == 19);
+    assert(result(0,1) == 22);
+    assert(result(1,0) == 43);
+    assert(result(1,1) == 50);
+}
+
+void test_matmul_square_identity() {
+    Tensor a(2, 2);
+    Tensor I(2, 2);
+
+    a(0,0) = 1; a(0,1) = 2;
+    a(1,0) = 3; a(1,1) = 4;
+
+    I(0,0) = 1; I(0,1) = 0;
+    I(1,0) = 0; I(1,1) = 1;
+
+    Tensor result = Tensor::matmul_square(a, I);
+
+    assert(result(0,0) == 1);
+    assert(result(0,1) == 2);
+    assert(result(1,0) == 3);
+    assert(result(1,1) == 4);
+}
+
+void test_matmul_square_3x3() {
+    Tensor a(3, 3);
+    Tensor b(3, 3);
+
+    a(0,0) = 1; a(0,1) = 2; a(0,2) = 3;
+    a(1,0) = 4; a(1,1) = 5; a(1,2) = 6;
+    a(2,0) = 7; a(2,1) = 8; a(2,2) = 9;
+
+    b(0,0) = 1; b(0,1) = 0; b(0,2) = 0;
+    b(1,0) = 0; b(1,1) = 1; b(1,2) = 0;
+    b(2,0) = 0; b(2,1) = 0; b(2,2) = 1;
+
+    Tensor result = Tensor::matmul_square(a, b);
+
+    assert(result(0,0) == 1);
+    assert(result(0,1) == 2);
+    assert(result(0,2) == 3);
+    assert(result(1,0) == 4);
+    assert(result(1,1) == 5);
+    assert(result(1,2) == 6);
+    assert(result(2,0) == 7);
+    assert(result(2,1) == 8);
+    assert(result(2,2) == 9);
+}
+
 void test_dot() {
     Tensor a = Tensor::randint(2, 2, 1, 5);
     Tensor b = Tensor::randint(3, 3, 1, 5);
@@ -158,6 +219,9 @@ int main() {
     test_tensor_multiplication();
     test_scalar_division();
     test_tensor_division();
+    test_matmul_square_2x2();
+    test_matmul_square_identity();
+    test_matmul_square_3x3();
     test_dot();
     test_randint();
     

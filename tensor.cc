@@ -1,4 +1,14 @@
 #include "tensor.h"
+
+void Tensor::show() {
+    for (size_t i = 0; i < _rows; i++) {
+        for (size_t j = 0; j < _cols; j++) {
+            std::cout << _data[i * _cols + j] << " ";
+        }
+        std::cout << "\n";
+    }
+}
+
 Tensor::Tensor(size_t r, size_t c)
     : _rows(r),
       _cols(c),
