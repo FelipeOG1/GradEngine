@@ -36,7 +36,7 @@ public:
     Tensor(size_t r, size_t c);
     static Tensor rand(size_t r, size_t c);
     static Tensor randint(size_t r, size_t c, int low, int high);
-    static Tensor matmul(const Tensor& a, const Tensor& b);
+    static Tensor matmul_square(const Tensor& a, const Tensor& b);
     
     void show();
     

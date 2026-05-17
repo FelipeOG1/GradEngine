@@ -38,8 +38,21 @@ Tensor Tensor::randint(size_t r, size_t c, int low, int high) {
     return result;
 }
 
-Tensor Tensor::matmul(const Tensor& M, const Tensor& N) {
+Tensor Tensor::matmul_square(const Tensor& M, const Tensor& N) {
     matmul_square_dims(M, N);
+    Tensor P(M.rows(), N.cols());
+    const size_t WIDTH = M.cols(); // or N.cols()
+    
+    for (size_t i=0; i < WIDTH; ++i) {
+        for (size_t j=0; j < WIDTH; ++j) {
+            float curr_sum = 0.0f;
+            for (size_t k=0; k < WIDTH; ++k) {
+                curr_sum += (M(i, k) * N(k, j));
+            }           
+            P(i, j) = curr_sum;
+        }
+    }
+    return P;
 }
       
 
