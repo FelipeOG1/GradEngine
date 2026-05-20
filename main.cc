@@ -2,15 +2,23 @@
 #include "tensor.h"
 #include "gpuBuffer.hpp"
 #include <vector>
+
+
+
+__global__ void matrixMulKernel(float *Md, float *Nd, float Pd) {
+    int tx = threadIdx.x;
+    int ty = threadIdx.y;
+}
+
 int main() {
     Tensor M = Tensor::rand(3, 3);
     Tensor N = Tensor::rand(3, 3);
     Tensor P = Tensor::rand(3, 3);
+    Tensor ans = Tensor::matmul_square(M, N);
     
-    size_t size_alloc = (M.size() + N.size()) * sizeof(float);
-    GpuBuffer b(size_alloc);
-    b.upload(M.data(), M.size());
-    
+    for (auto v : ans) {
+        std::cout << v << std::endl;
+    }
     return 0;
 
 }

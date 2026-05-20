@@ -15,11 +15,19 @@ public:
     }
 
     void upload(const float* host_ptr, size_t bytes) {
+        
         hipMemcpy(_f_ptr, host_ptr, bytes * sizeof(float), hipMemcpyHostToDevice);
     }
+    
     void download(float* host_ptr, size_t bytes) {
         hipMemcpy(host_ptr, _f_ptr, bytes * sizeof(float), hipMemcpyDeviceToHost);
     }
+    
+    void download(float* host_ptr, size_t bytes, size_t offset) {
+        hipMemcpy(host_ptr, _f_ptr, (bytes * sizeof(float)) + offset, hipMemcpyDeviceToHost);
+    }
+    
+    size_t alocated_bytes() const { return _n; }
 
     
    ~GpuBuffer() { if (_f_ptr)  hipFree(_f_ptr); }

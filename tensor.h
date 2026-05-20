@@ -54,7 +54,13 @@ public:
     
     Tensor operator/(float scalar) const;
     Tensor operator/(const Tensor& other) const;
-
+    
+    std::vector<float>::const_iterator begin() const {    
+        return _data.begin();
+    }
+    std::vector<float>::const_iterator end() const {    
+        return _data.end();
+    }
     
     size_t rows() const;
     size_t cols() const;
