@@ -1,34 +1,37 @@
 #pragma once
 #include <hip/hip_runtime.h>
 #include <stdexcept>
-
-class GpuBuffer {
+#include <tensor.h>
+class GTensor {
 
 private:
     float* _f_ptr;
     size_t _n;
-public:
-    GpuBuffer(size_t n) : _n(n) {
-        if(hipMalloc(&_f_ptr, n * sizeof(float)) != hipSuccess) {
-            throw std::runtime_error("Proble alocating memory on gpu");
-        }
-    }
-
-    void upload(const float* host_ptr, size_t bytes) {
-        
+    void _upload(const float* host_ptr, size_t bytes) {
         hipMemcpy(_f_ptr, host_ptr, bytes * sizeof(float), hipMemcpyHostToDevice);
     }
     
-    void download(float* host_ptr, size_t bytes) {
+    void _download(float* host_ptr, size_t bytes) {
         hipMemcpy(host_ptr, _f_ptr, bytes * sizeof(float), hipMemcpyDeviceToHost);
     }
     
-    void download(float* host_ptr, size_t bytes, size_t offset) {
+    void _download(float* host_ptr, size_t bytes, size_t offset) {
         hipMemcpy(host_ptr, _f_ptr, (bytes * sizeof(float)) + offset, hipMemcpyDeviceToHost);
     }
-    
-    size_t alocated_bytes() const { return _n; }
 
+
+
+public:
+    GTensor(Tensor t) : _n(t.size())  {
+        if(hipMalloc(&_f_ptr, t.size()) != hipSuccess) {
+            throw std::runtime_error("Proble alocating bytes in gpu");
+        }
+        
+    }
+
+   
+    size_t () const { return _n; }
+    float* data() const { return _f_ptr; }
     
    ~GpuBuffer() { if (_f_ptr)  hipFree(_f_ptr); }
 };
