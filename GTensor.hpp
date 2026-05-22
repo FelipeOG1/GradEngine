@@ -28,8 +28,7 @@ public:
         _upload(t.data(), t.size());
     }
     
-    __device__ size_t size() const { return _n; }
-    __device__ float* data() const { return _f_ptr; } 
-    
+    __host__ __device__ size_t size() const { return _n; }
+    __host__ __device__ float* data() const { return _f_ptr; } 
    ~GTensor() { if (_f_ptr)  hipFree(_f_ptr); }
 };
