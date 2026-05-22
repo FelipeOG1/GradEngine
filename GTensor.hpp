@@ -2,6 +2,7 @@
 #include <hip/hip_runtime.h>
 #include <stdexcept>
 #include <tensor.h>
+
 class GTensor {
 
 private:
@@ -18,26 +19,17 @@ private:
     void _download(float* host_ptr, size_t bytes, size_t offset) {
         hipMemcpy(host_ptr, _f_ptr, (bytes * sizeof(float)) + offset, hipMemcpyDeviceToHost);
     }
-
-
-
+    
 public:
     GTensor(Tensor t) : _n(t.size())  {
         if(hipMalloc(&_f_ptr, t.size()) != hipSuccess) {
             throw std::runtime_error("Proble alocating bytes in gpu");
         }
-        
+        _upload(t.data(), t.size());
     }
-
-   
-    size_t () const { return _n; }
-    float* data() const { return _f_ptr; }
     
-   ~GpuBuffer() { if (_f_ptr)  hipFree(_f_ptr); }
+    __device__ size_t size() const { return _n; }
+    __device__ float* data() const { return _f_ptr; } 
+    
+   ~GTensor() { if (_f_ptr)  hipFree(_f_ptr); }
 };
-
-
- 
-
-
-
