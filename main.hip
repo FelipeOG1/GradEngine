@@ -16,7 +16,6 @@ __global__ void matrixMulKernel(float* m, float* n, float* p, int width) {
     p[ty * width + tx] = t_value;
 }
 int main() {
-    
     GpuBuffer g(30);
     return 0;
 }
