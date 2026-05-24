@@ -1,5 +1,4 @@
 #include "tensor.h"
-
 Tensor Tensor::rand(size_t r, size_t c) {
     Tensor result(r, c);
     static std::mt19937 rng(
@@ -16,7 +15,7 @@ Tensor Tensor::rand(size_t r, size_t c) {
     
     result.upload_to_device(tmp.data(), tmp.size());
     
-    return result; 
+    return result;
 }
 
 Tensor Tensor::randint(size_t r, size_t c, int low, int high) {
@@ -33,6 +32,8 @@ Tensor Tensor::randint(size_t r, size_t c, int low, int high) {
     for (size_t i = 0; i < result.size(); i++) {
         tmp[i] = static_cast<float>(dist(rng));    
     }
+
+    result.upload_to_device(tmp.data(), tmp.size());
 
     return result;
 }
