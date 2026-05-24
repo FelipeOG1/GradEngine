@@ -1,4 +1,13 @@
 #include "tensor.h"
+
+void Tensor::upload_to_device(float* host_ptr, size_t size) {
+	_data.upload(host_ptr, size); 
+}
+
+void Tensor::download_to_host(float* host_ptr, size_t size) { 
+	_data.download(host_ptr, size);
+}
+ 
 Tensor Tensor::rand(size_t r, size_t c) {
     Tensor result(r, c);
     static std::mt19937 rng(

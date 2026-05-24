@@ -19,15 +19,19 @@ public:
     static Tensor rand(size_t r, size_t c);
     static Tensor randint(size_t r, size_t c, int low, int high);
 
-    void upload_to_device(float* host_ptr, size_t size) { _data.upload(host_ptr, size); }
-    void dowload_to_host(float* host_ptr, size_t size) { _data.download(host_ptr, size); }
-    void show_data() {  }
+    void upload_to_device(float* host_ptr, size_t size);
+    void download_to_host(float* host_ptr, size_t size);
+	void show_data();
     
     Tensor operator()(size_t r, size_t c);
     
 
     size_t size() const { return _size; }
     const std::vector<size_t>& shape() const { return _shape; }
+	
+	float* data() { return _data.data(); }
+	const float* data() const { return _data.data(); }
+	; 
        
 };
 
