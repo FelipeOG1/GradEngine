@@ -11,8 +11,8 @@ void Tensor::show_data() {
 	std::vector<float> tmp(_size);
 	download_to_host(tmp.data(), tmp.size());
 	
-	for (const &value : tmp) {
-		std::cout<< value;
+	for (const auto &value : tmp) {
+		std::cout<< value << std::endl;
 	}
 		
 }
