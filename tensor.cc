@@ -9,7 +9,7 @@ void Tensor::download_to_host(float* host_ptr, size_t size) {
 }
 
 void Tensor::show_data() {
-	std::vector<float> tmp(_size);
+std::vector<float> tmp(_size);
 	download_to_host(tmp.data(), tmp.size());
 	
 	for (const auto &value : tmp) {
@@ -28,13 +28,14 @@ Tensor Tensor::rand(size_t r, size_t c) {
         dist(0.0f, 1.0f);
     
     std::vector<float> tmp(r * c);
-    for (size_t i=0; i < result.size(); i++) {
-        tmp[i] = dist(rng); 
-    }
+    
+    for (auto& t : tmp) { t = static_cast<float>(dist(rng)); }
+    
     
     result.upload_to_device(tmp.data(), tmp.size());
     
     return result;
+
 }
 
 Tensor Tensor::randint(size_t r, size_t c, int low, int high) {
@@ -48,10 +49,8 @@ Tensor Tensor::randint(size_t r, size_t c, int low, int high) {
     
     std::vector<float> tmp(r * c);
     
-    for (size_t i = 0; i < result.size(); i++) {
-        tmp[i] = static_cast<float>(dist(rng));    
-    }
-
+    for (auto& t : tmp) { t = static_cast<float>(dist(rng)); }
+    
     result.upload_to_device(tmp.data(), tmp.size());
 
     return result;
