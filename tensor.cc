@@ -17,7 +17,7 @@ std::vector<float> tmp(_size);
 	}	
 }
 
- 
+
 Tensor Tensor::rand(size_t r, size_t c) {
     Tensor result(r, c);
     static std::mt19937 rng(
@@ -55,7 +55,11 @@ Tensor Tensor::randint(size_t r, size_t c, int low, int high) {
 
     return result;
 }
-
+Tensor Tensor::full(size_t r, size_t c, float value) {
+    Tensor result(r, c);
+    result._data.fill(value, r*c);
+    return result;
+};
 float Tensor::operator()(size_t r, size_t c) {
     float val;
     hipMemcpy(&val, _data.data() + (r * _shape[1] + c), sizeof(float), hipMemcpyDeviceToHost);
