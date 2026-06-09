@@ -23,7 +23,7 @@ public:
     void download_to_host(float* host_ptr, size_t size);
 	void show_data();
     
-    Tensor operator()(size_t r, size_t c);
+    float operator()(size_t r, size_t c);
     
 
     size_t size() const { return _size; }

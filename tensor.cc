@@ -55,3 +55,9 @@ Tensor Tensor::randint(size_t r, size_t c, int low, int high) {
 
     return result;
 }
+
+float Tensor::operator()(size_t r, size_t c) {
+    float val;
+    hipMemcpy(&val, _data.data() + (r * _shape[1] + c), sizeof(float), hipMemcpyDeviceToHost);
+    return val;
+}
