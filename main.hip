@@ -4,20 +4,19 @@
 #include <vector>
 #include <chrono>
 
-__global__ void matsum(float* data, size_t size, int value) {
-	int idx = blockIdx.x * blockDim.x + threadIdx.x;
-	if (idx < (int)size) {
-		data[idx] += value;
-	}
-}
 
+//blockIdx
+//blockDim
+//threadIdx
 
-void cpu_mat_sum(std::vector<float> &tmp, float value) {
-    for (auto &v : tmp) { 
-        v += value; 
+__global__ void k(float* data, size_t size) {
+    int idx = blockIdx * blockDim + threadIdx;
+    if (idx < size) {
+        data
+        
     }
+    
 }
-
 
 int main () {
     
