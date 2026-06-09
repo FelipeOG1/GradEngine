@@ -1,5 +1,5 @@
 #include "tensor.h"
-
+#include <hip/hip_runtime.h>
 void Tensor::upload_to_device(float* host_ptr, size_t size) {
 	_data.upload(host_ptr, size); 
 }
@@ -17,7 +17,7 @@ std::vector<float> tmp(_size);
 	}	
 }
 
-
+//static implementations
 Tensor Tensor::rand(size_t r, size_t c) {
     Tensor result(r, c);
     static std::mt19937 rng(
@@ -71,3 +71,7 @@ float Tensor::operator()(size_t r, size_t c) {
     hipMemcpy(&val, _data.data() + (r * _shape[1] + c), sizeof(float), hipMemcpyDeviceToHost);
     return val;
 }
+
+
+// operations implementations moved to tensor_ops_gpu.hip
+

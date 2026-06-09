@@ -27,6 +27,11 @@ public:
     static Tensor zeros(size_t r, size_t c);
 
 
+    //operations
+    Tensor matmul(const Tensor& other);
+    
+
+
     void upload_to_device(float* host_ptr, size_t size);
     void download_to_host(float* host_ptr, size_t size);
 	void show_data();
