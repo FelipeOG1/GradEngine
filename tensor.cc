@@ -60,6 +60,12 @@ Tensor Tensor::full(size_t r, size_t c, float value) {
     result._data.fill(value, r*c);
     return result;
 };
+Tensor Tensor::zeros(size_t r, size_t c) {
+    Tensor result(r, c);
+    result._data.zeros(r*c);
+    return result;
+};
+
 float Tensor::operator()(size_t r, size_t c) {
     float val;
     hipMemcpy(&val, _data.data() + (r * _shape[1] + c), sizeof(float), hipMemcpyDeviceToHost);
