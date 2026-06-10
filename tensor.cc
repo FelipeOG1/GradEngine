@@ -1,5 +1,6 @@
 #include "tensor.h"
 #include <hip/hip_runtime.h>
+#include <ops/ops.h>
 void Tensor::upload_to_device(float* host_ptr, size_t size) {
 	_data.upload(host_ptr, size); 
 }
@@ -73,5 +74,8 @@ float Tensor::operator()(size_t r, size_t c) {
 }
 
 
-// operations implementations moved to tensor_ops_gpu.hip
+Tensor Tensor::matmul(const Tensor& other) {
+    return ops::matmul(*this, other);
+    
+}
 
