@@ -14,22 +14,23 @@ LDFLAGS  = -L$(ROCM_PATH)/lib -lamdhip64
 # Directories
 SRC_DIR = .
 OPS_DIR = ops
+KERNELS_DIR = kernels
 TEST_DIR = tests
 BUILD_DIR = build
 BIN_DIR = bin
 
-# Source files
-SRCS = $(SRC_DIR)/tensor.cc
-MAIN_SRC = $(SRC_DIR)/main.hip
-TEST_SRC = $(TEST_DIR)/test_tensor.cpp
-MATMUL_SRC = $(SRC_DIR)/kernels/matmul.hip
-ELEMENTWISE_SRC = $(SRC_DIR)/kernels/elementWise.hip
-OPS_SRC = $(OPS_DIR)/ops.hip
+# Auto-detect source files
+SRCS_CC  := $(wildcard $(SRC_DIR)/*.cc)
+SRCS_HIP := $(wildcard $(SRC_DIR)/*.hip) $(wildcard $(SRC_DIR)/$(KERNELS_DIR)/*.hip) $(wildcard $(SRC_DIR)/$(OPS_DIR)/*.hip)
+TEST_SRCS := $(wildcard $(TEST_DIR)/*.cpp)
 
-# Object files
-OBJS = $(BUILD_DIR)/tensor.o $(BUILD_DIR)/kernels/matmul.o $(BUILD_DIR)/kernels/elementWise.o $(BUILD_DIR)/ops/ops.o
-MAIN_OBJ = $(BUILD_DIR)/main.o
-TEST_OBJ = $(BUILD_DIR)/test_tensor.o
+# Object files (mirror directory structure inside build/)
+OBJS_CC  := $(patsubst $(SRC_DIR)/%.cc,$(BUILD_DIR)/%.o,$(SRCS_CC))
+OBJS_HIP := $(patsubst $(SRC_DIR)/%.hip,$(BUILD_DIR)/%.o,$(SRCS_HIP))
+OBJS     := $(OBJS_CC) $(OBJS_HIP)
+
+MAIN_OBJ  := $(BUILD_DIR)/main.o
+TEST_OBJS := $(patsubst $(TEST_DIR)/%.cpp,$(BUILD_DIR)/tests/%.o,$(TEST_SRCS))
 
 # Targets
 MAIN_TARGET = $(BIN_DIR)/main
@@ -47,44 +48,43 @@ test: $(TEST_TARGET)
 	@echo "Running tests..."
 	@$(TEST_TARGET)
 
-# Build directories
+# Build directories (auto-create any needed subdirectory)
 $(BUILD_DIR):
-	@mkdir -p $(BUILD_DIR)
-
-$(BIN_DIR):
-	@mkdir -p $(BIN_DIR)
-
-$(BUILD_DIR)/kernels: | $(BUILD_DIR)
 	@mkdir -p $@
 
-$(BUILD_DIR)/ops: | $(BUILD_DIR)
+$(BUILD_DIR)/$(KERNELS_DIR): | $(BUILD_DIR)
 	@mkdir -p $@
 
-# Object files
-$(BUILD_DIR)/tensor.o: $(SRC_DIR)/tensor.cc $(SRC_DIR)/tensor.h | $(BUILD_DIR)
+$(BUILD_DIR)/$(OPS_DIR): | $(BUILD_DIR)
+	@mkdir -p $@
+
+$(BUILD_DIR)/$(TEST_DIR): | $(BUILD_DIR)
+	@mkdir -p $@
+
+# Pattern rules for .cc files
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cc | $(BUILD_DIR)
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(BUILD_DIR)/main.o: $(SRC_DIR)/main.hip $(SRC_DIR)/tensor.h | $(BUILD_DIR)
+# Pattern rules for .hip files in any subdir
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.hip | $(BUILD_DIR)
+	@mkdir -p $(dir $@)
 	$(HIPCC) $(HIPFLAGS) -c $< -o $@
 
-$(BUILD_DIR)/test_tensor.o: $(TEST_DIR)/test_tensor.cpp $(SRC_DIR)/tensor.h | $(BUILD_DIR)
+# Pattern rules for test files
+$(BUILD_DIR)/tests/%.o: $(TEST_DIR)/%.cpp | $(BUILD_DIR)/$(TEST_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-$(BUILD_DIR)/kernels/matmul.o: $(MATMUL_SRC) kernels/matmul.h | $(BUILD_DIR)/kernels
-	$(HIPCC) $(HIPFLAGS) -c $< -o $@
-
-$(BUILD_DIR)/kernels/elementWise.o: $(ELEMENTWISE_SRC) kernels/elementWise.h ops/ops.h | $(BUILD_DIR)/kernels
-	$(HIPCC) $(HIPFLAGS) -c $< -o $@
-
-$(BUILD_DIR)/ops/ops.o: $(OPS_SRC) $(SRC_DIR)/tensor.h kernels/matmul.h kernels/elementWise.h ops/ops.h | $(BUILD_DIR)/ops
-	$(HIPCC) $(HIPFLAGS) -c $< -o $@
 
 # Targets
-$(MAIN_TARGET): $(OBJS) $(MAIN_OBJ) | $(BIN_DIR)
+$(MAIN_TARGET): $(filter-out $(MAIN_OBJ),$(OBJS)) $(MAIN_OBJ) | $(BIN_DIR)
 	$(HIPCC) $(HIPFLAGS) $^ -o $@ $(LDFLAGS)
 
-$(TEST_TARGET): $(OBJS) $(TEST_OBJ) | $(BIN_DIR)
+# Test target: links all objects (except main.o) with test objects
+$(TEST_TARGET): $(filter-out $(MAIN_OBJ),$(OBJS)) $(TEST_OBJS) | $(BIN_DIR)
 	$(HIPCC) $(HIPFLAGS) $^ -o $@ $(LDFLAGS)
+
+$(BIN_DIR):
+	@mkdir -p $@
 
 clean:
 	@rm -rf $(BUILD_DIR) $(BIN_DIR)
