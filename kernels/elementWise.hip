@@ -16,11 +16,9 @@ void launch_element_wise(const float* A, const float* B, float* C, int w_A, OpCo
     dim3 grid((w_A + block.x - 1) / block.x);
     switch(opcode) {
         case OpCode::SUM:
-            hipLaunchKernelGGL(compute_element_wise, grid, block, 0, 0, A, B, C, w_A, SumOp{});
-            break;
+            hipLaunchKernelGGL(compute_element_wise, grid, block, 0, 0, A, B, C, w_A, SumOp{}); break;
         case OpCode::SUB:
-            hipLaunchKernelGGL(compute_element_wise, grid, block, 0, 0, A, B, C, w_A, SubOp{});
-            break;
+            hipLaunchKernelGGL(compute_element_wise, grid, block, 0, 0, A, B, C, w_A, SubOp{}); break;
     }
     
     hipError_t err = hipGetLastError();
