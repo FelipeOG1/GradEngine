@@ -78,12 +78,9 @@ Tensor Tensor::matmul(const Tensor& other) {
     return ops::standardMatrix::matmul(*this, other);   
 }
 
-Tensor Tensor::matsub(const Tensor& other) {
-    return ops::elementWise::matsub(*this, other);   
+
+//element wise
+
+Tensor Tensor::operator+(const Tensor& other) {
+    return ops::elementWise::matsum(*this, other);
 }
-
-Tensor Tensor::matsum(const Tensor& other) {
-    return ops::elementWise::matsum(*this, other);   
-}
-
-
