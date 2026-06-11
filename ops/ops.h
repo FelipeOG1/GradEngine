@@ -2,5 +2,15 @@
 #include "tensor.h"
 
 namespace ops {
-    Tensor matmul(const Tensor& a, const Tensor& b);
+
+    namespace elementWise {
+
+
+    }
+
+    namespace standardMatrix {
+        Tensor matmul(const Tensor& a, const Tensor& b);
+        
+
+    }
 }
