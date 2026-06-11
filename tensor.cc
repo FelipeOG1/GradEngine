@@ -82,5 +82,18 @@ Tensor Tensor::matmul(const Tensor& other) {
 //element wise
 
 Tensor Tensor::operator+(const Tensor& other) {
+    
     return ops::elementWise::matsum(*this, other);
 }
+
+Tensor Tensor::operator/(const Tensor& other) {
+    
+    return ops::elementWise::matmul(*this, other);
+}
+
+Tensor Tensor::operator*(const Tensor& other) {
+    
+    return ops::elementWise::matdiv(*this, other);
+}
+
+

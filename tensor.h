@@ -35,7 +35,8 @@ public:
     
     //element wise
     Tensor operator+(const Tensor& other);
-
+    Tensor operator/(const Tensor& other);
+    Tensor operator*(const Tensor& other);
 
     void upload_to_device(float* host_ptr, size_t size);
     void download_to_host(float* host_ptr, size_t size);
