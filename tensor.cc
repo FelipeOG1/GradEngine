@@ -75,7 +75,15 @@ float Tensor::operator()(size_t r, size_t c) {
 
 
 Tensor Tensor::matmul(const Tensor& other) {
-    return ops::standardMatrix::matmul(*this, other);
-    
+    return ops::standardMatrix::matmul(*this, other);   
 }
+
+Tensor Tensor::matsub(const Tensor& other) {
+    return ops::elementWise::matsub(*this, other);   
+}
+
+Tensor Tensor::matsum(const Tensor& other) {
+    return ops::elementWise::matsum(*this, other);   
+}
+
 

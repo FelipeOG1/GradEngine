@@ -28,8 +28,15 @@ public:
 
 
     //operations
+    
+    //standard matrix
     Tensor matmul(const Tensor& other);
     
+    
+    //element wise
+    Tensor matsub(const Tensor& other);
+    Tensor matsum(const Tensor& other);
+
 
 
     void upload_to_device(float* host_ptr, size_t size);
