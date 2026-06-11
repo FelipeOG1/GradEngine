@@ -22,7 +22,25 @@ namespace ops {
             
             return c;
         }
- 
+
+        Tensor matdiv(const Tensor& a, const Tensor& b) {
+            Tensor c(a.shape()[0], a.shape()[1]);
+            
+            launch_element_wise(a.data(), b.data(),
+            c.data(), a.size(), OpCode::DIV);
+            
+            return c;
+        }
+
+        Tensor matmul(const Tensor& a, const Tensor& b) {
+            Tensor c(a.shape()[0], a.shape()[1]);
+            
+            launch_element_wise(a.data(), b.data(),
+            c.data(), a.size(), OpCode::MUL);
+            
+            return c;
+        }
+
         
     }
     namespace standardMatrix {

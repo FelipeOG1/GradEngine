@@ -7,11 +7,19 @@ struct SumOp { __device__ __forceinline__ float operator()(float a, float b) con
 
 struct SubOp { __device__ __forceinline__ float operator()(float a, float b) const  { return a - b; } };
 
+struct MulOp { __device__ __forceinline__ float operator()(float a, float b) const  { return a * b; } };
+
+struct DivOp { __device__ __forceinline__ float operator()(float a, float b) const  { return a / b; } };
+
+
 namespace ops {
 
     namespace elementWise {
         Tensor matsum(const Tensor& a, const Tensor& b);
         Tensor matsub(const Tensor& a, const Tensor& b);
+        Tensor matmul(const Tensor& a, const Tensor& b);
+        Tensor matdiv(const Tensor& a, const Tensor& b);
+
 
     }
 

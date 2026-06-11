@@ -14,11 +14,21 @@ __global__ void compute_element_wise(const float* A, const float* B, float* C, i
 void launch_element_wise(const float* A, const float* B, float* C, int w_A, OpCode opcode) {
     dim3 block(256);
     dim3 grid((w_A + block.x - 1) / block.x);
+    
     switch(opcode) {
         case OpCode::SUM:
             hipLaunchKernelGGL(compute_element_wise, grid, block, 0, 0, A, B, C, w_A, SumOp{}); break;
+            
         case OpCode::SUB:
             hipLaunchKernelGGL(compute_element_wise, grid, block, 0, 0, A, B, C, w_A, SubOp{}); break;
+
+        case OpCode::DIV:
+            hipLaunchKernelGGL(compute_element_wise, grid, block, 0, 0, A, B, C, w_A, DivOp{}); break;
+
+        case OpCode::MUL:
+            hipLaunchKernelGGL(compute_element_wise, grid, block, 0, 0, A, B, C, w_A, MulOp{}); break;
+
+
     }
     
     hipError_t err = hipGetLastError();
