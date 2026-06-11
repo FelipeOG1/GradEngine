@@ -23,10 +23,11 @@ SRCS = $(SRC_DIR)/tensor.cc
 MAIN_SRC = $(SRC_DIR)/main.hip
 TEST_SRC = $(TEST_DIR)/test_tensor.cpp
 MATMUL_SRC = $(SRC_DIR)/kernels/matmul.hip
+ELEMENTWISE_SRC = $(SRC_DIR)/kernels/elementWise.hip
 OPS_SRC = $(OPS_DIR)/ops.hip
 
 # Object files
-OBJS = $(BUILD_DIR)/tensor.o $(BUILD_DIR)/kernels/matmul.o $(BUILD_DIR)/ops/ops.o
+OBJS = $(BUILD_DIR)/tensor.o $(BUILD_DIR)/kernels/matmul.o $(BUILD_DIR)/kernels/elementWise.o $(BUILD_DIR)/ops/ops.o
 MAIN_OBJ = $(BUILD_DIR)/main.o
 TEST_OBJ = $(BUILD_DIR)/test_tensor.o
 
@@ -72,7 +73,10 @@ $(BUILD_DIR)/test_tensor.o: $(TEST_DIR)/test_tensor.cpp $(SRC_DIR)/tensor.h | $(
 $(BUILD_DIR)/kernels/matmul.o: $(MATMUL_SRC) kernels/matmul.h | $(BUILD_DIR)/kernels
 	$(HIPCC) $(HIPFLAGS) -c $< -o $@
 
-$(BUILD_DIR)/ops/ops.o: $(OPS_SRC) $(SRC_DIR)/tensor.h kernels/matmul.h ops/ops.h | $(BUILD_DIR)/ops
+$(BUILD_DIR)/kernels/elementWise.o: $(ELEMENTWISE_SRC) kernels/elementWise.h ops/ops.h | $(BUILD_DIR)/kernels
+	$(HIPCC) $(HIPFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/ops/ops.o: $(OPS_SRC) $(SRC_DIR)/tensor.h kernels/matmul.h kernels/elementWise.h ops/ops.h | $(BUILD_DIR)/ops
 	$(HIPCC) $(HIPFLAGS) -c $< -o $@
 
 # Targets
