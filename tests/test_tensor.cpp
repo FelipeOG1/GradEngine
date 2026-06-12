@@ -29,7 +29,7 @@ void test_upload_download() {
     t.upload_to_device(data.data(), data.size());
 
     std::vector<float> downloaded(4);
-    t.download_to_host(downloaded.data(), downloaded.size());
+    t.download_to_host(downloaded.data(), t.size());
 
     assert(approx_eq(downloaded[0], 5.0f));
     assert(approx_eq(downloaded[1], 6.0f));
