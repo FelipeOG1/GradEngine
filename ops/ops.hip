@@ -40,6 +40,15 @@ namespace ops {
             
             return c;
         }
+        
+        Tensor relu(const Tensor& t) {
+            Tensor out(t.shape()[0], t.shape()[1]);
+            launch_element_wise(t.data(), out.data(),
+            t.size(), OpCode::RELU);
+            
+            return out;
+
+        }
 
         
     }
