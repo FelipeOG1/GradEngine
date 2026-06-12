@@ -25,8 +25,7 @@ public:
     static Tensor randint(size_t r, size_t c, int low, int high);
     static Tensor full(size_t r, size_t c, float value);
     static Tensor zeros(size_t r, size_t c);
-
-
+    
     //operations
     
     //standard matrix
@@ -37,6 +36,11 @@ public:
     Tensor operator+(const Tensor& other);
     Tensor operator/(const Tensor& other);
     Tensor operator*(const Tensor& other);
+
+
+    static Tensor relu(const Tensor& t);
+    
+    
 
     void upload_to_device(float* host_ptr, size_t size);
     void download_to_host(float* host_ptr, size_t size);

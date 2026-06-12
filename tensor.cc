@@ -96,4 +96,7 @@ Tensor Tensor::operator*(const Tensor& other) {
     return ops::elementWise::matdiv(*this, other);
 }
 
+Tensor Tensor::relu(const Tensor &t) {
+    return ops::elementWise::relu(t);
+}
 
