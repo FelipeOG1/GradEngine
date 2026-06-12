@@ -15,7 +15,7 @@ private:
     std::vector<size_t> _shape;
 public:
     Tensor(size_t r, size_t c) : _data(r * c), _size( r * c ), _shape(2) { _shape[0] = r; _shape[1] = c; }
-    Tensor(std::vector<float>& matrix, size_t r, size_t c) : _data(r*c), _shape(2) {
+    Tensor(std::vector<float>& matrix, size_t r, size_t c) : _data(r*c), _size(r*c), _shape(2) {
         _shape[0] = r; _shape[1]= c;
         _data.upload(matrix.data(), matrix.size());
         

@@ -88,12 +88,12 @@ Tensor Tensor::operator+(const Tensor& other) {
 
 Tensor Tensor::operator/(const Tensor& other) {
     
-    return ops::elementWise::matmul(*this, other);
+    return ops::elementWise::matdiv(*this, other);
 }
 
 Tensor Tensor::operator*(const Tensor& other) {
     
-    return ops::elementWise::matdiv(*this, other);
+    return ops::elementWise::matmul(*this, other);
 }
 
 Tensor Tensor::relu(const Tensor &t) {
