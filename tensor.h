@@ -61,7 +61,7 @@ public:
 	const float* data() const { return _data.data(); }
 	
 	// Autograd methods
-    bool requires_grad() { return _requires_grad; }
+    bool requires_grad() const { return _requires_grad; }
 	void set_requires_grad(bool requires_grad) { _requires_grad = requires_grad; }
 	
 	const std::shared_ptr<GraphNode>& creator_node() const { return _creator_node; }
