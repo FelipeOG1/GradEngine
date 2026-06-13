@@ -16,11 +16,11 @@ void test_constructor_from_vector() {
     assert(t.size() == 4);
     assert(t.shape()[0] == 2);
     assert(t.shape()[1] == 2);
-
-    assert(approx_eq(t(0, 0), 1.0f));
-    assert(approx_eq(t(0, 1), 2.0f));
-    assert(approx_eq(t(1, 0), 3.0f));
-    assert(approx_eq(t(1, 1), 4.0f));
+    
+    assert(t(0, 0) == 1.0f);
+    assert(t(0, 1) == 2.0f);
+    assert(t(1, 0) == 3.0f);
+    assert(t(1, 1) == 4.0f);
 }
 
 void test_upload_download() {
