@@ -15,8 +15,8 @@ private:
     GpuBuffer _data;
     size_t _size;
     std::vector<size_t> _shape;
-    bool requires_grad = false;
-    std::shared_ptr<GraphNode> creator_node = nullptr;
+    bool _requires_grad = false;
+    std::shared_ptr<GraphNode> _creator_node = nullptr;
 public:
     Tensor(size_t r, size_t c) : _data(r * c), _size( r * c ), _shape(2) { _shape[0] = r; _shape[1] = c; }
     
@@ -59,7 +59,13 @@ public:
 	
 	float* data() { return _data.data(); }
 	const float* data() const { return _data.data(); }
-	; 
+	
+	// Autograd methods
+    bool requires_grad() { return _requires_grad; }
+	void set_requires_grad(bool requires_grad) { _requires_grad = requires_grad; }
+	
+	const std::shared_ptr<GraphNode>& creator_node() const { return _creator_node; }
+	void set_creator_node(std::shared_ptr<GraphNode> node) { _creator_node = std::move(node); }
        
 };
 
