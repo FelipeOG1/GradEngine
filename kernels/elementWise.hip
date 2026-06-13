@@ -1,6 +1,6 @@
 #include <iostream>
 #include <hip/hip_runtime.h>
-#include "../ops/ops.h"
+#include "../ops/opcodes.h"
 #include "elementWise.h"
 
 template<typename OpType>

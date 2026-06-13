@@ -1,4 +1,5 @@
-#include <engine.h>
+#include "engine.h"
+#include "tensor.h"
 
 void test_constructor() {
     std::vector<float> a_data = {2.0f, 3.0f, 2.0f, 2.3f};

@@ -2,11 +2,13 @@
 #include <cassert>
 #include "gpu_buffer.hpp"
 #include <vector>
-#include <cassert>
 #include <cstddef>
-#include <vector>
 #include <random>
 #include <iostream>
+#include <memory>
+
+struct GraphNode;
+
 
 class Tensor {
 private:
@@ -14,6 +16,7 @@ private:
     size_t _size;
     std::vector<size_t> _shape;
     bool requires_grad = false;
+    std::shared_ptr<GraphNode> creator_node = nullptr;
 public:
     Tensor(size_t r, size_t c) : _data(r * c), _size( r * c ), _shape(2) { _shape[0] = r; _shape[1] = c; }
     

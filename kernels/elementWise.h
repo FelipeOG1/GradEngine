@@ -1,5 +1,5 @@
 #pragma once
-#include "ops/ops.h"
+#include "ops/opcodes.h"
 
 template<typename OpType>
 __global__ void compute_binary_op(const float* A, const float* B, float* C, int w_A, OpType op);

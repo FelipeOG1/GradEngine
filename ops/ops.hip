@@ -1,4 +1,5 @@
 #include "ops/ops.h"
+#include "tensor.h"
 #include "kernels/matmul.h"
 #include "kernels/elementWise.h"
 namespace ops {

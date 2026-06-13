@@ -1,8 +1,14 @@
-#include "ops/ops.h"
+#pragma once
+#include "ops/opcodes.h"
 #include <vector>
 #include <memory>
 
-
+class Tensor;
+struct GraphNode {
+    OpCode op;
+    std::vector<std::shared_ptr<Tensor>> parents;
+    
+};
 class AutoGradEngine {
 private:
     AutoGradEngine() {}
