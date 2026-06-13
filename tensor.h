@@ -13,6 +13,7 @@ private:
     GpuBuffer _data;
     size_t _size;
     std::vector<size_t> _shape;
+    bool requires_grad = false;
 public:
     Tensor(size_t r, size_t c) : _data(r * c), _size( r * c ), _shape(2) { _shape[0] = r; _shape[1] = c; }
     
