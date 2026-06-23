@@ -9,8 +9,6 @@ struct GraphNode {
     OpCode op;
     std::vector<std::shared_ptr<Tensor>> parents;
     
-    GraphNode(OpCode op, std::vector<std::shared_ptr<Tensor>> inputs) : op(op), parents(std::move(inputs)) {}
-    GraphNode(OpCode op, std::shared_ptr<Tensor> a) : op(op), parents{std::move(a)} {}
     GraphNode(OpCode op, std::shared_ptr<Tensor> a, std::shared_ptr<Tensor> b) : op(op), parents{std::move(a), std::move(b)} {}
 };
 
