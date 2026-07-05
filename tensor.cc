@@ -1,7 +1,7 @@
 #include "tensor.h"
 #include <hip/hip_runtime.h>
 #include "ops/ops.h"
-
+#include "engine.h"
 void Tensor::upload_to_device(float* host_ptr, size_t size) {
 	_data.upload(host_ptr, size); 
 }

@@ -3,6 +3,7 @@
 #include "engine.h"
 #include "kernels/matmul.h"
 #include "kernels/elementWise.h"
+
 namespace ops {
 
     namespace elementWise {
@@ -11,8 +12,9 @@ namespace ops {
             
             launch_element_wise(a.data(), b.data(),
             c.data(), a.size(), OpCode::SUM);
-            
-                       
+
+            auto node = std::make_shared<Node>(a.data(), b.data(), c.data(), OpCode::SUM);
+            c.parents_node = node;
             return c;
             
         }

@@ -8,6 +8,7 @@
 #include <memory>
 
 
+struct Node;
 
 class Tensor {
 private:
@@ -16,6 +17,8 @@ private:
     std::vector<size_t> _shape;
     bool _requires_grad = false;
 public:
+
+    std::shared_ptr<Node> parents_node;
     Tensor(size_t r, size_t c) : _data(r * c), _size( r * c ), _shape(2) { _shape[0] = r; _shape[1] = c; }
     
     Tensor(std::vector<float>& matrix, size_t r, size_t c) : _data(r*c), _size(r*c), _shape(2) {
@@ -61,8 +64,7 @@ public:
 	// Autograd methods
     bool requires_grad() const { return _requires_grad; }
 	void set_requires_grad(bool requires_grad) { _requires_grad = requires_grad; }
-	
-       
+	      
 };
 
 template<typename T>
