@@ -7,6 +7,6 @@ int main() {
     Tensor a = Tensor::randint(4, 4, 1, 10);
     Tensor b = Tensor::randint(4, 4, 1, 10);
     Tensor c = a + b;
-    std::cout << c.parents_node->a_data << std::endl;
+	Engine::show_parents(c);
     return 0;
 }

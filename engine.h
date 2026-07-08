@@ -3,6 +3,8 @@
 #include <vector>
 #include <memory>
 
+class Tensor;
+
 struct Node {
     const float* a_data;
     const float* b_data;
@@ -11,5 +13,10 @@ struct Node {
 
     Node(const float* a, const float* b, const float* c, OpCode operation)
         : a_data(a), b_data(b), c_data(c), op(operation) {}
+};
+namespace Engine {
+
+void show_parents(Tensor& child);
+
 };
 
