@@ -11,7 +11,7 @@ void Tensor::download_to_host(float* host_ptr, size_t size) {
 }
 
 void Tensor::show_data() {
-std::vector<float> tmp(_size);
+	std::vector<float> tmp(_size);
 	download_to_host(tmp.data(), tmp.size());
 	
 	for (const auto &value : tmp) {
