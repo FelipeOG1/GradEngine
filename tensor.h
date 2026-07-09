@@ -18,7 +18,7 @@ private:
     bool _requires_grad = false;
 public:
 
-    std::shared_ptr<Node> parents_node;
+    std::shared_ptr<Node> parents_node = nullptr;
     Tensor(size_t r, size_t c) : _data(r * c), _size( r * c ), _shape(2) { _shape[0] = r; _shape[1] = c; }
     
     Tensor(std::vector<float>& matrix, size_t r, size_t c) : _data(r*c), _size(r*c), _shape(2) {

@@ -1,7 +1,7 @@
 #pragma once
 #include <hip/hip_runtime.h>
 
-enum class OpCode { SUM, SUB, DIV, MUL, RELU };
+enum class OpCode { RELU, SUB, DIV, MUL, SUM };
 
 struct SumOp { __device__ __forceinline__ float operator()(float a, float b) const  { return a + b; } };
 
