@@ -7,15 +7,13 @@
 #include <array>
 namespace Engine {
 	void show_parents(Tensor& child) {
-		
-		child.parents_node->dad->show_data();
-		child.parents_node->mom->show_data();
-
+		for (auto& parent : child.parents_node->parents) {
+			parent->show_data();
+		}
 	}
 
 
          
     
 };
-    
 

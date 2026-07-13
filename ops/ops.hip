@@ -14,9 +14,8 @@ namespace ops {
             c.data(), a.size(), OpCode::SUM);
 			
 			auto a_ptr = std::make_shared<Tensor>(a);
-			
 			auto b_ptr= std::make_shared<Tensor>(b);
-			
+            
             auto node = std::make_shared<Node>(a_ptr, b_ptr, OpCode::SUM);
             c.parents_node = node;
             return c;

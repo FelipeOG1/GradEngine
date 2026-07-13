@@ -8,12 +8,15 @@
 class Tensor;
 enum class OpCode;
 struct Node {
-	std::shared_ptr<Tensor> dad;
-	std::shared_ptr<Tensor> mom;
+    std::vector<std::shared_ptr<Tensor>> parents;
     OpCode op;
 
     Node(std::shared_ptr<Tensor> a,std::shared_ptr<Tensor> b,OpCode operation)
-    : dad(a), mom(b), op(operation) {}
+    : op(operation) {
+
+        parents.push_back(std::move(a));
+        parents.push_back(std::move(b));
+    }
 };
 namespace Engine {
 
