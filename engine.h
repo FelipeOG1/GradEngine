@@ -22,7 +22,7 @@ namespace Engine {
 
 void show_parents(Tensor& child);
 
-
+void setup_stuff(const Tensor& a, const Tensor& b, Tensor& c, OpCode op);
 
 };
 
