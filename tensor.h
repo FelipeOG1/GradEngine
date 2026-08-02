@@ -15,22 +15,20 @@ private:
     size_t _size;
     std::vector<size_t> _shape;
     bool _requires_grad = false;
-    GpuBuffer _grad;
 public:
     std::function<void()> backward;
     std::shared_ptr<Node> parents_node = nullptr;
-    Tensor(size_t r, size_t c) : _data(r * c), _size( r * c ), _shape(2), _grad(r*c) { 
+    std::shared_ptr<Tensor> grad = nullptr;
+    Tensor(size_t r, size_t c) : _data(r * c), _size( r * c ), _shape(2){ 
       _shape[0] = r;
       _shape[1] = c;
-      _grad.zeros();
     }
     
-    Tensor(std::vector<float>& matrix, size_t r, size_t c) : _data(r*c), _size(r*c), _shape(2), _grad(r*c) {
+    Tensor(std::vector<float>& matrix, size_t r, size_t c) : _data(r*c), _size(r*c), _shape(2) {
         _shape[0] = r; _shape[1]= c;
         _data.upload(matrix.data(), matrix.size());
-        _grad.zeros();
+
     }
-    
     
     static Tensor rand(size_t r, size_t c);
     static Tensor randint(size_t r, size_t c, int low, int high);
@@ -55,10 +53,8 @@ public:
 
     void upload_to_device(float* host_ptr, size_t size);
     void download_to_host(float* host_ptr, size_t size);
-    void download_grad_to_host(float* host_ptr, size_t size);
 	  void show_data();
     
-    void show_grads();
     
     float operator()(size_t r, size_t c);
     
@@ -69,11 +65,6 @@ public:
 	  float* data() { return _data.data(); }
 	  const float* data() const { return _data.data(); }
     
-    float* grad() { return _grad.data(); }
-	  const float* grad() const { return _grad.data(); }
-    
-    
-	
 	// Autograd methods
     bool requires_grad() const { return _requires_grad; }
 	  void set_requires_grad(bool requires_grad) { _requires_grad = requires_grad; }

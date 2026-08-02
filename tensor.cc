@@ -13,10 +13,6 @@ void Tensor::download_to_host(float* host_ptr, size_t size) {
 }
 
 
-void Tensor::download_grad_to_host(float* host_ptr, size_t size) { 
-	_grad.download(host_ptr, size);
-}
-
 void Tensor::show_data() {
   std::vector<float> tmp(_data.size());
 	download_to_host(tmp.data(), tmp.size());
@@ -26,14 +22,7 @@ void Tensor::show_data() {
 	}	
 }
 
-void Tensor::show_grads() {
-	std::vector<float> tmp(_grad.size());
-	download_grad_to_host(tmp.data(), tmp.size());
-	
-	for (const auto &value : tmp) {
-		std::cout<< value << std::endl;
-	}	
-}
+
 
 //static implementations
 Tensor Tensor::rand(size_t r, size_t c) {
