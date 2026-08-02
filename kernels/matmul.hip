@@ -5,7 +5,6 @@ __global__ void matmul(const float* A, const float* B, float* C, int h_A, int w_
     int col = blockIdx.x * blockDim.x + threadIdx.x;
     
     if (row < h_A && col < w_B) {
-        
         float sum = 0.0f;
         for (int i=0; i < w_A; ++i) {
             sum += A[row * w_A + i] * B[i * w_B + col];

@@ -13,8 +13,7 @@ namespace ops {
             launch_element_wise(a.data(), b.data(),
             c.data(), a.size(), OpCode::SUM);
             
-            
-            Engine::create_parents_node(a, b, c, OpCode::SUM);
+            if (a.requires_grad() || b.requires_grad()) Engine::create_parents_node(a, b, c, OpCode::SUM);
 		
             return c;
             

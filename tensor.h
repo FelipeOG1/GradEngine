@@ -27,6 +27,7 @@ public:
         
     }
     
+    
     static Tensor rand(size_t r, size_t c);
     static Tensor randint(size_t r, size_t c, int low, int high);
     static Tensor full(size_t r, size_t c, float value);
