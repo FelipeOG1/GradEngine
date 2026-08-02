@@ -45,8 +45,11 @@ void test_upload_download() {
   assert(approx_eq(downloaded[3], 8.0f));
 }
 void test_grad_download() {
-
-
+  Tensor c = Tensor::rand(2, 2);
+  std::vector<float> tmp(c.size());
+  c.download_grad_to_host(tmp.data(), tmp.size());
+  assert (tmp.size() == c.size());
+  for (auto& v: tmp) assert(v == 0);
 }
 
 
