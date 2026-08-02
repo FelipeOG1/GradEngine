@@ -47,8 +47,8 @@ void test_upload_download() {
 
 
 void test_grad_download() {
-    std::vector<float> data = {5.0f, 6.0f, 7.0f, 8.0f};
-    Tensor t(2, 2);
+    Tensor t = Tensor::rand(3, 3);
+    
     
     
 }

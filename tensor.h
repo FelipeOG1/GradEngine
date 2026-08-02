@@ -69,6 +69,9 @@ public:
 	  float* data() { return _data.data(); }
 	  const float* data() const { return _data.data(); }
     
+    float* grad() { return _grad.data(); }
+	  const float* grad() const { return _grad.data(); }
+    
     
 	
 	// Autograd methods
