@@ -57,7 +57,6 @@ void test_relu_grad() {
 }
 
 
-
 void run_test_ops() {
   test_matsum_no_grad();
   test_matsum_grad();

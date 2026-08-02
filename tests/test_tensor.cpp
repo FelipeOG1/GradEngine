@@ -17,10 +17,18 @@ void test_constructor_from_vector() {
     assert(t.shape()[0] == 2);
     assert(t.shape()[1] == 2);
     
+    
+    
     assert(t(0, 0) == 1.0f);
     assert(t(0, 1) == 2.0f);
     assert(t(1, 0) == 3.0f);
     assert(t(1, 1) == 4.0f);
+    
+    assert(t(0, 0) == 1.0f);
+    assert(t(0, 1) == 2.0f);
+    assert(t(1, 0) == 3.0f);
+    assert(t(1, 1) == 4.0f);
+
 }
 
 void test_upload_download() {
@@ -36,6 +44,17 @@ void test_upload_download() {
     assert(approx_eq(downloaded[2], 7.0f));
     assert(approx_eq(downloaded[3], 8.0f));
 }
+
+
+void test_grad_download() {
+    std::vector<float> data = {5.0f, 6.0f, 7.0f, 8.0f};
+    Tensor t(2, 2);
+    
+    
+}
+
+
+
 
 void test_zeros() {
     Tensor t = Tensor::zeros(2, 3);
