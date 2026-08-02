@@ -17,12 +17,21 @@ struct Node {
         parents.push_back(std::move(a));
         parents.push_back(std::move(b));
     }
+    Node(std::shared_ptr<Tensor> a, OpCode operation)
+    : op(operation) {
+
+      parents.push_back(std::move(a));
+    }
+    
 };
+
+    
 namespace Engine {
 
 void show_parents(Tensor& child);
 
 void create_parents_node(const Tensor& a, const Tensor& b, Tensor& c, OpCode op);
+void create_parents_node(const Tensor& a, Tensor& c, OpCode op);
 
 
 };

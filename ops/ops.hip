@@ -25,6 +25,8 @@ namespace ops {
             launch_element_wise(a.data(), b.data(),
             c.data(), a.size(), OpCode::SUB);
             
+            if (a.requires_grad() || b.requires_grad()) Engine::create_parents_node(a, b, c, OpCode::SUB);
+
                        
             return c;
         }
@@ -34,7 +36,8 @@ namespace ops {
             
             launch_element_wise(a.data(), b.data(),
             c.data(), a.size(), OpCode::DIV);
-            
+            if (a.requires_grad() || b.requires_grad()) Engine::create_parents_node(a, b, c, OpCode::DIV);
+
                        
             return c;
         }
@@ -44,7 +47,8 @@ namespace ops {
             
             launch_element_wise(a.data(), b.data(),
             c.data(), a.size(), OpCode::MUL);
-            
+            if (a.requires_grad() || b.requires_grad()) Engine::create_parents_node(a, b, c, OpCode::MUL);
+
                        
             return c;
         }
@@ -54,7 +58,8 @@ namespace ops {
             launch_element_wise(t.data(), out.data(),
             t.size(), OpCode::RELU);
             
-                       
+            if (t.requires_grad()) Engine::create_parents_node(t, out, OpCode::RELU);
+            
             return out;
 
         }
@@ -67,6 +72,8 @@ namespace ops {
             
             launch_matmul(a.data(), b.data(),
             c.data(), a.shape()[0], a.shape()[1], b.shape()[1]);
+
+            if (a.requires_grad() || b.requires_grad()) Engine::create_parents_node(a, b, c, OpCode::MUL);
             
                        
             return c;

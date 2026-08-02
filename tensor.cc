@@ -79,7 +79,6 @@ Tensor Tensor::matmul(const Tensor& other) {
     return ops::standardMatrix::matmul(*this, other);   
 }
 
-
 //element wise
 
 Tensor Tensor::operator+(const Tensor& other) {
