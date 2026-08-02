@@ -11,11 +11,9 @@ namespace Engine {
 	void create_parents_node(const Tensor& a, const Tensor& b, Tensor& c, OpCode op) {
 		auto a_ptr = std::make_shared<Tensor>(a);
 		auto b_ptr = std::make_shared<Tensor>(b);
-		auto new_node = std::make_shared<Node>(a_ptr, b_ptr, OpCode::SUM);
+		auto new_node = std::make_shared<Node>(a_ptr, b_ptr, op);
 		c.parents_node = new_node;	
-	}
-
-         
+  }
     
 };
 

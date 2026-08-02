@@ -218,7 +218,7 @@ void test_show_data() {
     t.show_data();
 }
 
-int main() {
+void run_test_tensor() {
     test_constructor_from_vector();
     std::cout << "[PASS] test_constructor_from_vector\n";
 
@@ -265,7 +265,6 @@ int main() {
     std::cout << "[PASS] test_show_data\n";
 
     std::cout << "\n===========================\n";
-    std::cout << "All tests passed!\n";
+    std::cout << "All tensor tests passed!\n";
     std::cout << "===========================\n";
-    return 0;
 }

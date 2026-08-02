@@ -50,7 +50,7 @@ public:
 
     void upload_to_device(float* host_ptr, size_t size);
     void download_to_host(float* host_ptr, size_t size);
-	void show_data();
+	  void show_data();
     
     float operator()(size_t r, size_t c);
     
@@ -58,12 +58,12 @@ public:
     size_t size() const { return _size; }
     const std::vector<size_t>& shape() const { return _shape; }
 	
-	float* data() { return _data.data(); }
-	const float* data() const { return _data.data(); }
+	  float* data() { return _data.data(); }
+	  const float* data() const { return _data.data(); }
 	
 	// Autograd methods
     bool requires_grad() const { return _requires_grad; }
-	void set_requires_grad(bool requires_grad) { _requires_grad = requires_grad; }
+	  void set_requires_grad(bool requires_grad) { _requires_grad = requires_grad; }
 	      
 };
 
