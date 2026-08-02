@@ -22,7 +22,8 @@ namespace Engine {
 
 void show_parents(Tensor& child);
 
-void setup_stuff(const Tensor& a, const Tensor& b, Tensor& c, OpCode op);
+void create_parents_node(const Tensor& a, const Tensor& b, Tensor& c, OpCode op);
+
 
 };
 
