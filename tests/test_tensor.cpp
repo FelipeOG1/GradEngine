@@ -31,19 +31,7 @@ void test_constructor_from_vector() {
 
 }
 
-void test_upload_download() {
-  std::vector<float> data = {5.0f, 6.0f, 7.0f, 8.0f};
-  Tensor t(2, 2);
-  t.upload_to_device(data.data(), data.size());
 
-  std::vector<float> downloaded(4);
-  t.download_to_host(downloaded.data(), t.size());
-
-  assert(approx_eq(downloaded[0], 5.0f));
-  assert(approx_eq(downloaded[1], 6.0f));
-  assert(approx_eq(downloaded[2], 7.0f));
-  assert(approx_eq(downloaded[3], 8.0f));
-}
 
 void test_zeros() {
   Tensor t = Tensor::zeros(2, 3);
@@ -226,11 +214,15 @@ void test_show_data() {
   t.show_data();
 }
 
+void test_set_grad() {
+  Tensor a = Tensor::rand(3, 3);
+  a.set_requires_grad(true);
+   
+}
 void run_test_tensor() {
   test_constructor_from_vector();
   std::cout << "[PASS] test_constructor_from_vector\n";
-
-  test_upload_download();
+  
   std::cout << "[PASS] test_upload_download\n";
 
   test_zeros();

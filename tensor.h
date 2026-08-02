@@ -6,7 +6,6 @@
 #include <iostream>
 #include <memory>
 #include <functional>
-
 struct Node;
 
 class Tensor {
@@ -15,6 +14,12 @@ private:
     size_t _size;
     std::vector<size_t> _shape;
     bool _requires_grad = false;
+    std::vector<float> _host_data; //only use for start() and end();
+    void _sync_host_to_device();
+    void _upload_to_device(float* host_ptr, size_t size);
+    void _download_to_host(float* host_ptr, size_t size);
+  
+    
 public:
     std::function<void()> backward;
     std::shared_ptr<Node> parents_node = nullptr;
@@ -51,9 +56,7 @@ public:
     
     
 
-    void upload_to_device(float* host_ptr, size_t size);
-    void download_to_host(float* host_ptr, size_t size);
-	  void show_data();
+    void show_data();
     
     
     float operator()(size_t r, size_t c);
@@ -65,15 +68,15 @@ public:
 	  float* data() { return _data.data(); }
 	  const float* data() const { return _data.data(); }
     
-	// Autograd methods
+	  // Autograd methods
     bool requires_grad() const { return _requires_grad; }
-	  void set_requires_grad(bool requires_grad) { 
-      _requires_grad = requires_grad;
-      if (_requires_grad) {
-        grad = std::make_shared<Tensor>(_shape[0], _shape[1]);
+	  void set_requires_grad(bool requires_grad); 
+    
+    //iterators
+    float* begin() {
        
-      }
     }
+    
     
           
 };
