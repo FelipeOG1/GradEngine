@@ -21,8 +21,8 @@ void test_matsum_grad() {
   b.set_requires_grad(true);
   Tensor c = ops::elementWise::matsum(a, b);
   assert( c(0, 0) == 20);
-  assert(a.requires_grad() == true);
-  assert(b.requires_grad() == false);
+  assert(a.requires_grad() == false);
+  assert(b.requires_grad() == true);
   assert(c.requires_grad() == false);
   assert(c.parents_node != nullptr);
   assert(c.parents_node->parents[0]->data());
@@ -59,6 +59,7 @@ void test_relu_grad() {
 
 void run_test_ops() {
   test_matsum_no_grad();
+  test_matsum_grad();
+  test_matmul_grad();
   test_relu_grad();
-  
 }

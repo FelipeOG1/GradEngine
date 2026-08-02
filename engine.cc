@@ -20,6 +20,6 @@ namespace Engine {
 		auto new_node = std::make_shared<Node>(a_ptr, op);
     c.parents_node = new_node;
   }
-    
+     
 };
 
