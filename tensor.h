@@ -67,7 +67,13 @@ public:
     
 	// Autograd methods
     bool requires_grad() const { return _requires_grad; }
-	  void set_requires_grad(bool requires_grad) { _requires_grad = requires_grad; }
+	  void set_requires_grad(bool requires_grad) { 
+      _requires_grad = requires_grad;
+      if (_requires_grad) {
+        grad = std::make_shared<Tensor>(_shape[0], _shape[1]);
+       
+      }
+    }
     
           
 };

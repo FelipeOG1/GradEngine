@@ -45,8 +45,6 @@ void test_upload_download() {
   assert(approx_eq(downloaded[3], 8.0f));
 }
 
-
-
 void test_zeros() {
   Tensor t = Tensor::zeros(2, 3);
   assert(t.size() == 6);

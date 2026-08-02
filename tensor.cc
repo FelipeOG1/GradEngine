@@ -22,8 +22,6 @@ void Tensor::show_data() {
 	}	
 }
 
-
-
 //static implementations
 Tensor Tensor::rand(size_t r, size_t c) {
     Tensor result(r, c);
