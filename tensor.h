@@ -19,7 +19,7 @@ private:
     void _upload_to_device(float* host_ptr, size_t size);
     void _download_to_host(float* host_ptr, size_t size);
   
-    
+   
 public:
     std::function<void()> backward;
     std::shared_ptr<Node> parents_node = nullptr;

@@ -21,10 +21,8 @@ void Tensor::_sync_host_to_device() {
 
 
 void Tensor::show_data() {
-  std::vector<float> tmp(_data.size());
-	_download_to_host(tmp.data(), tmp.size());
-	
-	for (const auto &value : tmp) {
+	_sync_host_to_device();
+	for (auto value : _host_data) {
 		std::cout<< value << std::endl;
 	}	
 }
