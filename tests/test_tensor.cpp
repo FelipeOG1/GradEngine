@@ -219,6 +219,15 @@ void test_set_grad() {
   a.set_requires_grad(true);
    
 }
+void test_iterator() {
+  std::vector<float> data = {1.0f, 2.0f, 3.0f, 4.0f};
+  Tensor a(data, 2, 2);
+  int i = 0;
+  for (auto v : a) {
+    assert (v == data[i]);
+    i++;
+  }
+}
 void run_test_tensor() {
   test_constructor_from_vector();
   std::cout << "[PASS] test_constructor_from_vector\n";
