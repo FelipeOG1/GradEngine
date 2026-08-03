@@ -74,11 +74,15 @@ public:
     
     //iterators
     float* begin() {
-       
+      _sync_host_to_device();
+      return _host_data.data();
     }
     
+    float* end() {
+      return _host_data.data() + _host_data.size();
+    }
     
-          
+        
 };
 
 template<typename T>
