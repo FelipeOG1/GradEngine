@@ -217,8 +217,10 @@ void test_show_data() {
 void test_set_grad() {
   Tensor a = Tensor::rand(3, 3);
   a.set_requires_grad(true);
-   
+  assert (a.grad != nullptr);
+  assert (a.grad->size() == a.size());
 }
+
 void test_iterator() {
   std::vector<float> data = {1.0f, 2.0f, 3.0f, 4.0f};
   Tensor a(data, 2, 2);

@@ -111,7 +111,7 @@ Tensor Tensor::relu(const Tensor &t) {
 void Tensor::set_requires_grad(bool requires_grad) {
   _requires_grad = requires_grad;
   if (_requires_grad) {
-    grad = std::make_shared<Tensor>(_shape[0], _shape[1]);
+    grad = std::make_shared<Tensor>(Tensor::zeros(_shape[0], _shape[1]));
   }
 }
 
