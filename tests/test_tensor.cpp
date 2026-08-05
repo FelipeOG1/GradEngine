@@ -214,7 +214,7 @@ void test_show_data() {
   t.show_data();
 }
 
-void test_set_grad() {
+void test_set_requires_grad() {
   Tensor a = Tensor::rand(3, 3);
   a.set_requires_grad(true);
   assert (a.grad != nullptr);
