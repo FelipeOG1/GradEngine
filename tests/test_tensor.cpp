@@ -216,9 +216,14 @@ void test_show_data() {
 
 void test_set_requires_grad() {
   Tensor a = Tensor::rand(3, 3);
+  Tensor b = Tensor::rand(3, 3);
   a.set_requires_grad(true);
+  b.set_requires_grad(true);
   assert (a.grad != nullptr);
-  assert (a.grad->size() == a.size());
+  assert (a.grad->size() == b.size());
+  assert (b.grad != nullptr);
+  assert (b.grad->size() == b.size());
+  
 }
 
 void test_iterator() {
