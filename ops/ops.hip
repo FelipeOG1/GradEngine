@@ -3,7 +3,7 @@
 #include "engine.h"
 #include "kernels/matmul.h"
 #include "kernels/elementWise.h"
-
+#include <memory>
 namespace ops {
 
     namespace elementWise {
@@ -13,7 +13,9 @@ namespace ops {
             launch_element_wise(a.data(), b.data(),
             c.data(), a.size(), OpCode::SUM);
 
-            c.backward = [](){ std::cout << "hello from CCC";};
+            c.backward = [a, b, c]() mutable {
+               c.grad = std::make_shared<Tensor>(*a.grad + *b.grad);
+            };
             
             
             if (a.requires_grad() || b.requires_grad()) Engine::create_parents_node(a, b, c, OpCode::SUM);

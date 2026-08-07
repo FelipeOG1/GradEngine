@@ -86,19 +86,8 @@ float Tensor::operator()(size_t r, size_t c) {
 Tensor Tensor::matmul(const Tensor& other) {
     return ops::standardMatrix::matmul(*this, other);   
 }
-std::shared_ptr<Tensor> Tensor::grad_add(const Tensor& a, const Tensor& b){
-  Tensor new_grad = *a.grad + *b.grad;
-  return std::make_shared<Tensor>(new_grad);
-}
 
-std::shared_ptr<Tensor> Tensor::grad_mul(const Tensor& a, const Tensor& b) {
-  Tensor new_grad = *a.grad * *b.grad;
-  return std::make_shared<Tensor>(new_grad);
-}
-    
-
-
-
+  
 //element wise
 
 Tensor Tensor::operator+(const Tensor& other) {

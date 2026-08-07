@@ -40,13 +40,8 @@ public:
     static Tensor full(size_t r, size_t c, float value);
     static Tensor zeros(size_t r, size_t c);
     
-    //grad operations
-    static std::shared_ptr<Tensor> grad_add(const Tensor& a, const Tensor& b);
-    static std::shared_ptr<Tensor> grad_mul(const Tensor& a, const Tensor& b);
-    
-    
-    
-    
+   
+  
     //operations
     
     //standard matrix

@@ -31,7 +31,7 @@ void test_matsum_grad() {
   assert(c.parents_node->parents[1]->data());
   
   assert(c.grad == nullptr);
-  c.grad = Tensor::grad_add(a, b);
+  c.grad = std::make_shared<Tensor>(*a.grad + *b.grad);
   
 }
 
