@@ -19,7 +19,7 @@ private:
     void _upload_to_device(float* host_ptr, size_t size);
     void _download_to_host(float* host_ptr, size_t size);
   
-   
+      
 public:
     std::function<void()> backward;
     std::shared_ptr<Node> parents_node = nullptr;
@@ -34,11 +34,18 @@ public:
         _data.upload(matrix.data(), matrix.size());
 
     }
-    
+    // Static operations 
     static Tensor rand(size_t r, size_t c);
     static Tensor randint(size_t r, size_t c, int low, int high);
     static Tensor full(size_t r, size_t c, float value);
     static Tensor zeros(size_t r, size_t c);
+    
+    //grad operations
+    static std::shared_ptr<Tensor> grad_add(const Tensor& a, const Tensor& b);
+    static std::shared_ptr<Tensor> grad_mul(const Tensor& a, const Tensor& b);
+    
+    
+    
     
     //operations
     
@@ -81,7 +88,9 @@ public:
     float* end() {
       return _host_data.data() + _host_data.size();
     }
-    
+
+
+ 
         
 };
 

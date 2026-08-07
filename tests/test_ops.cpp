@@ -13,7 +13,7 @@ void test_matsum_no_grad() {
   assert(b.requires_grad() == false);
   assert(c.requires_grad() == false);
   assert(c.parents_node == nullptr);
-  c.backward();
+   
 }
 
 void test_matsum_grad() {
@@ -30,6 +30,8 @@ void test_matsum_grad() {
   assert(c.parents_node->parents[0]->data());
   assert(c.parents_node->parents[1]->data());
   
+  assert(c.grad == nullptr);
+  c.grad = Tensor::grad_add(a, b);
   
 }
 
