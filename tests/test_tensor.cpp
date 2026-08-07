@@ -224,6 +224,9 @@ void test_set_requires_grad() {
   assert (b.grad != nullptr);
   assert (b.grad->size() == b.size());
   
+  a.grad = b.grad;
+  assert (a.grad->size() == b.size());
+  
 }
 
 void test_iterator() {

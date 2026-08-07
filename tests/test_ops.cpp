@@ -20,9 +20,10 @@ void test_matsum_grad() {
   std::vector<float> v = {10.0f, 10.0f, 10.0f, 10.0f};
   Tensor a(v, 2, 2) ; Tensor b(v, 2, 2);
   b.set_requires_grad(true);
+  a.set_requires_grad(true);
   Tensor c = ops::elementWise::matsum(a, b);
   assert(c(0, 0) == 20);
-  assert(a.requires_grad() == false);
+  assert(a.requires_grad() == true);
   assert(b.requires_grad() == true);
   assert(c.requires_grad() == false);
   assert(c.parents_node != nullptr);

@@ -1,7 +1,5 @@
 #pragma once
 #include <hip/hip_runtime.h>
-#include <stdexcept>
-#include <vector>
 #include <cstring>
 #include <memory>
 
